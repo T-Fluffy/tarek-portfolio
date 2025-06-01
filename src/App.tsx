@@ -1,4 +1,3 @@
-// src/App.tsx
 import { Routes, Route } from "react-router-dom";
 import Navbar from "./components/Navbar";
 
@@ -13,7 +12,7 @@ const App: React.FC = () => {
       <Navbar /> {/* Always visible */}
       <main style={{ padding: "1rem" }}>
         <Routes>
-          <Route path="/" element={<Home />} />
+          <Route path="/" element={<Home/>}/>
           <Route path="/about" element={<About />} />
           <Route path="/projects" element={<Projects />} />
           <Route path="/contact" element={<Contact />} />
@@ -22,5 +21,4 @@ const App: React.FC = () => {
     </>
   );
 };
-
 export default App;

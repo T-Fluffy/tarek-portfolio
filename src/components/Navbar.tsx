@@ -14,6 +14,13 @@ import {
 } from "@mui/material";
 import MenuIcon from "@mui/icons-material/Menu";
 import { NavLink, useNavigate } from "react-router-dom";
+import HomeIcon from '@mui/icons-material/Home';
+import PermIdentityIcon from '@mui/icons-material/PermIdentity';
+import FolderOpenIcon from '@mui/icons-material/FolderOpen';
+import PermContactCalendarIcon from '@mui/icons-material/PermContactCalendar';
+
+
+
 const Navbar: React.FC = () => {
   const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null);
   const theme = useTheme();
@@ -96,6 +103,7 @@ const Navbar: React.FC = () => {
                   },
                 }}
               >
+                <HomeIcon style={{ fontSize: '32px', color: '#1976d2', marginRight: '4px' }} />
                 Home
               </Button>
               <Button
@@ -110,6 +118,7 @@ const Navbar: React.FC = () => {
                   },
                 }}
               >
+                <PermIdentityIcon style={{ fontSize: '32px', color: '#1976d2', marginRight: '4px' }} />
                 About
               </Button>
               <Button
@@ -124,6 +133,7 @@ const Navbar: React.FC = () => {
                   },
                 }}
               >
+                <FolderOpenIcon style={{ fontSize: '32px', color: '#1976d2', marginRight: '4px' }} />
                 Projects
               </Button>
               <Button
@@ -138,6 +148,7 @@ const Navbar: React.FC = () => {
                   },
                 }}
               >
+                <PermContactCalendarIcon style={{ fontSize: '32px', color: '#1976d2', marginRight: '4px' }} />
                 Contact
               </Button>
             </>

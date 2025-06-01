@@ -1,5 +1,6 @@
 import type { Project } from "../types/Project";
 import ProjectCard from "../components/ProjectCard";
+import CanvasBackground from "../components/CanvasBackground";
 
 const projects: Project[] = [
   {
@@ -28,14 +29,15 @@ const projects: Project[] = [
 
 const Projects: React.FC = () => {
   return (
-    <div className="max-w-5xl mx-auto p-6">
+    <><CanvasBackground />
+    <div className="max-w-5xl mx-auto p-6" style={{ position: "relative", zIndex: 1 , color: "white"}}>
       <h1 className="text-3xl font-bold mb-6">Projects</h1>
       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
         {projects.map((project) => (
           <ProjectCard key={project.id} project={project} />
         ))}
       </div>
-    </div>
+    </div></>
   );
 };
 
