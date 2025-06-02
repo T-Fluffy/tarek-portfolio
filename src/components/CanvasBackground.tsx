@@ -38,7 +38,7 @@ const CanvasBackground: React.FC = () => {
       }
     };
 
-    const interval = setInterval(draw, 33);
+    const interval = setInterval(draw, 60);
 
     const handleResize = () => {
       canvas.width = window.innerWidth;

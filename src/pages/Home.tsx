@@ -1,8 +1,10 @@
 import React from "react";
-import { Container, Grid, Typography, Box, SvgIcon } from "@mui/material";
+import { Container, Grid, Typography, Box } from "@mui/material";
 import MyPicture from "../assets/Images/Myface.png";
 import CanvasBackground from "../components/CanvasBackground";
-
+import GitHubIcon from '@mui/icons-material/GitHub';
+import LinkedInIcon from '@mui/icons-material/LinkedIn';
+import EmailIcon from '@mui/icons-material/Email';
 
 const Home: React.FC = () => {
   return (
@@ -61,6 +63,15 @@ const Home: React.FC = () => {
               When I'm not coding, you'll find me gaming or exploring the latest in tech.
               Let's build something meaningful and creative together!
             </Typography>
+            <a href="https://github.com/T-Fluffy" target="github" rel="noopener noreferrer">
+              <GitHubIcon fontSize="large" sx={{ color: "white", mt: 2, mx: 1 }} />
+            </a>
+            <a href="https://www.linkedin.com/in/tarekhalloul/" target="linkedin" rel="noopener noreferrer">
+              <LinkedInIcon fontSize="large" sx={{ color: "white", mt: 2, mx: 1 }} />
+            </a>
+            <a href="halloultarek1@gmail.com">
+              <EmailIcon fontSize="large" sx={{ color: "white", mt: 2, mx: 1 }} />
+            </a>
           </Grid>
         </Grid>
       </Container>
