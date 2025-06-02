@@ -1,26 +1,34 @@
+// src/components/ProjectCard.tsx
+import React from "react";
 import type { Project } from "../types/Project";
+import { Card, CardMedia, CardContent, Typography, CardActionArea } from "@mui/material";
 
 interface Props {
   project: Project;
+  onClick: () => void;
 }
 
-const ProjectCard: React.FC<Props> = ({ project }) => {
+const ProjectCard: React.FC<Props> = ({ project, onClick }) => {
   return (
-    <div className="border rounded-lg p-4 shadow hover:shadow-md transition">
-      <img src={project.image} alt={project.title} className="w-full h-40 object-cover rounded mb-4" />
-      <h3 className="text-xl font-semibold mb-2">{project.title}</h3>
-      <p className="text-gray-700 mb-3">{project.description}</p>
-      <div className="flex gap-3">
-        <a href={project.githubLink} target="_blank" className="text-blue-500 hover:underline">
-          GitHub
-        </a>
-        {project.live && (
-          <a href={project.live} target="_blank" className="text-green-600 hover:underline">
-            Live
-          </a>
-        )}
-      </div>
-    </div>
+    <Card sx={{ height: "100%", borderRadius: 3, backgroundColor: "#121212", color: "#fff" }}>
+      <CardActionArea onClick={onClick}>
+        <CardMedia
+          component="img"
+          height="180"
+          image={project.image}
+          alt={project.title}
+          sx={{ objectFit: "cover" }}
+        />
+        <CardContent>
+          <Typography gutterBottom variant="h6" component="div">
+            {project.title}
+          </Typography>
+          <Typography variant="body2" color="gray">
+            {project.description}
+          </Typography>
+        </CardContent>
+      </CardActionArea>
+    </Card>
   );
 };
 

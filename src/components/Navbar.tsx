@@ -134,7 +134,7 @@ const Navbar: React.FC = () => {
                 }}
               >
                 <FolderOpenIcon style={{ fontSize: '32px', color: '#1976d2', marginRight: '4px' }} />
-                Projects
+                Portfolio
               </Button>
               <Button
                 color="inherit"
