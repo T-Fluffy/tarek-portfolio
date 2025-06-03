@@ -1,0 +1,39 @@
+[
+  {
+    "id": 1,
+    "title": "Game Portfolio Site",
+    "description": "A 3D developer desk scene using Three.js and React Three Fiber.",
+    "image": "/assets/project1.png",
+    "images": [
+      "/assets/project1.png",
+      "/assets/project1-scene.png",
+      "/assets/project1-code.png"
+    ],
+    "githubLink": "https://github.com/yourusername/game-portfolio",
+    "live": "https://yourportfolio.vercel.app"
+  },
+  {
+    "id": 2,
+    "title": "Document Editor",
+    "description": "React app for editing PDFs and images with .NET backend + Google Drive support.",
+    "image": "/assets/project2.png",
+    "images": [
+      "/assets/project1.png",
+      "/assets/project1-scene.png",
+      "/assets/project1-code.png"
+    ],
+    "githubLink": "https://github.com/yourusername/document-editor"
+  },
+  {
+    "id": 3,
+    "title": "Raidraptor Deck Optimizer",
+    "description": "Yu-Gi-Oh! Duel Links helper tool for building anti-Subterror Raidraptor decks.",
+    "image": "/assets/raidraptor.png",
+    "images": [
+      "/assets/project1.png",
+      "/assets/project1-scene.png",
+      "/assets/project1-code.png"
+    ],
+    "githubLink": "https://github.com/yourusername/duellinks-raidraptor"
+  }
+]

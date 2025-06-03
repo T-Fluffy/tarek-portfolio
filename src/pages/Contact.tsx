@@ -1,5 +1,5 @@
 import React from "react";
-import CanvasBackground from "../components/CanvasBackground";
+import CanvasBackground from "../components/UI/CanvasBackground";
 import {
   Box,
   Card,
@@ -22,7 +22,8 @@ const Contact: React.FC = () => {
           display: "flex",
           alignItems: "center",
           justifyContent: "center",
-          padding: 4,
+          padding: "1rem",
+          textAlign: "center",
         }}
       >
         <Card
@@ -39,7 +40,7 @@ const Contact: React.FC = () => {
             sx={{ backgroundColor: "#22293A", color: "#000" }}
           >
             <Typography variant="h4" gutterBottom color="cyan">
-              Contact Me
+             # Contact Me
             </Typography>
             <Typography variant="body1" gutterBottom color="#60A5FA">
               I'd love to hear from you! Fill in the form below to send me a message.

@@ -1,6 +1,6 @@
 import React from "react";
 import { Container, Typography, Box, Card, CardContent, Button } from "@mui/material";
-import CanvasBackground from "../components/CanvasBackground";
+import CanvasBackground from "../components/UI/CanvasBackground";
 import DownloadIcon from "@mui/icons-material/Download";
 import CV from "../assets/CV_TarekHalloul-fr.pdf"; 
 

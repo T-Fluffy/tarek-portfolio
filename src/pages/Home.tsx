@@ -1,7 +1,7 @@
 import React from "react";
 import { Container, Grid, Typography, Box } from "@mui/material";
 import MyPicture from "../assets/Images/Myface.png";
-import CanvasBackground from "../components/CanvasBackground";
+import CanvasBackground from "../components/UI/CanvasBackground";
 import GitHubIcon from '@mui/icons-material/GitHub';
 import LinkedInIcon from '@mui/icons-material/LinkedIn';
 import EmailIcon from '@mui/icons-material/Email';
