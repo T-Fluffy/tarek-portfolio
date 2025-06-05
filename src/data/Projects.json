@@ -1,39 +1,50 @@
 [
   {
     "id": 1,
-    "title": "Game Portfolio Site",
-    "description": "A 3D developer desk scene using Three.js and React Three Fiber.",
-    "image": "/assets/project1.png",
+    "title": "2048 GAME",
+    "description": "A Unity game made about the famous 2048 application.",
+    "image": "src/assets/Images/2048/gameplay.png",
     "images": [
-      "/assets/project1.png",
-      "/assets/project1-scene.png",
-      "/assets/project1-code.png"
+      "src/assets/Images/2048/gameplay.png",
+      "src/assets/Images/2048/Menu.png",
+      "src/assets/Images/2048/gameover.png"
     ],
-    "githubLink": "https://github.com/yourusername/game-portfolio",
-    "live": "https://yourportfolio.vercel.app"
+    "githubLink": "https://github.com/T-Fluffy/Project_2048"
   },
   {
     "id": 2,
-    "title": "Document Editor",
-    "description": "React app for editing PDFs and images with .NET backend + Google Drive support.",
-    "image": "/assets/project2.png",
+    "title": "PACMAN GAME",
+    "description": "This is a simple Unity Tilemap based pacman project.",
+    "image": "src/assets/Images/Pacman/Background.png",
     "images": [
-      "/assets/project1.png",
-      "/assets/project1-scene.png",
-      "/assets/project1-code.png"
+      "src/assets/Images/Pacman/startgame.png",
+      "src/assets/Images/Pacman/gameplay.png"
     ],
-    "githubLink": "https://github.com/yourusername/document-editor"
+    "githubLink": "https://github.com/T-Fluffy/Pacman"
   },
   {
     "id": 3,
-    "title": "Raidraptor Deck Optimizer",
-    "description": "Yu-Gi-Oh! Duel Links helper tool for building anti-Subterror Raidraptor decks.",
-    "image": "/assets/raidraptor.png",
+    "title": "My3DChess",
+    "description": "A 3D chess game using the unity URP.",
+    "image": "src/assets/Images/My3DChess/local.png",
     "images": [
-      "/assets/project1.png",
-      "/assets/project1-scene.png",
-      "/assets/project1-code.png"
+      "src/assets/Images/My3DChess/local.png",
+      "src/assets/Images/My3DChess/start.png",
+      "src/assets/Images/My3DChess/online-mode.png"
     ],
-    "githubLink": "https://github.com/yourusername/duellinks-raidraptor"
+    "githubLink": "https://github.com/T-Fluffy/My3DChess/tree/main"
+  },
+  {
+    "id": 4,
+    "title": "Tetris",
+    "description": "A Tilemap Unity Tetris game.",
+    "image": "src/assets/Images/",
+    "images": [
+      "src/assets/Images/Tetris/gameplay.png",
+      "src/assets/Images/Tetris/Menu.png",
+      "src/assets/Images/Tetris/gameoverRedo.png",
+      "src/assets/Images/Tetris/gameplay1.png"
+    ],
+    "githubLink": "https://github.com/T-Fluffy/My3DChess/tree/main"
   }
 ]

@@ -1,7 +1,12 @@
-// src/components/ProjectCard.tsx
 import React from "react";
 import type { Project } from "../types/Project";
-import { Card, CardMedia, CardContent, Typography, CardActionArea } from "@mui/material";
+import {
+  Card,
+  CardContent,
+  Typography,
+  CardActionArea,
+  Box
+} from "@mui/material";
 
 interface Props {
   project: Project;
@@ -9,18 +14,44 @@ interface Props {
 }
 
 const ProjectCard: React.FC<Props> = ({ project, onClick }) => {
+  const displayImage = project.images?.[0] || project.image;
+
   return (
-    <Card sx={{ height: "100%", borderRadius: 3, backgroundColor: "#121212", color: "#fff" }}>
+    <Card
+      sx={{
+        height: "100%",
+        borderRadius: 3,
+        backgroundColor: "#121212",
+        color: "#fff",
+        display: "flex",
+        flexDirection: "column"
+      }}
+    >
       <CardActionArea onClick={onClick}>
-        <CardMedia
-          component="img"
-          height="180"
-          image={project.image}
-          alt={project.title}
-          sx={{ objectFit: "cover" }}
-        />
+        <Box
+          sx={{
+            width: "100%",
+            height: 200,
+            overflow: "hidden",
+            borderTopLeftRadius: 12,
+            borderTopRightRadius: 12,
+            display: "flex",
+            alignItems: "center",
+            justifyContent: "center"
+          }}
+        >
+          <img
+            src={displayImage}
+            alt={project.title}
+            style={{
+              width: "100%",
+              height: "100%",
+              objectFit: "cover"
+            }}
+          />
+        </Box>
         <CardContent>
-          <Typography gutterBottom variant="h6" component="div">
+          <Typography gutterBottom variant="h6">
             {project.title}
           </Typography>
           <Typography variant="body2" color="gray">

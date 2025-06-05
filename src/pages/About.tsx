@@ -2,7 +2,7 @@ import React from "react";
 import { Container, Typography, Box, Card, CardContent, Button } from "@mui/material";
 import CanvasBackground from "../components/UI/CanvasBackground";
 import DownloadIcon from "@mui/icons-material/Download";
-import CV from "../assets/CV_TarekHalloul-fr.pdf"; 
+import CV from "../assets/CV_TarekHalloul-fr.pdf?url"; 
 
 const About: React.FC = () => {
   return (
@@ -23,7 +23,7 @@ const About: React.FC = () => {
         </Typography>
 
         <Typography variant="body1"  sx={{ fontSize: "1.2rem", mb: 3 }}>
-          Hi! I'm <strong>Tarek Halloul</strong>, a dedicated software engineer and game developer with strong experience in Unity, Godot, and web technologies like React, Angular, and Spring Boot. I love building immersive game worlds and elegant web apps.
+          Hi! I'm <strong style={{ color: "#60A5FA" }}>Tarek Halloul</strong>, a dedicated software engineer and game developer with experience in <strong style={{ color: "#60A5FA" }}>Unity and C#</strong>, web technologies like <strong style={{ color: "#60A5FA" }}>React, Angular, and Spring Boot</strong>. I love building immersive game worlds and elegant web apps.
         </Typography>
 
         <Typography variant="body1"  sx={{ fontSize: "1.2rem", mb: 3 }}>
@@ -31,7 +31,7 @@ const About: React.FC = () => {
         </Typography>
 
         <Typography variant="body1"  sx={{ fontSize: "1.2rem", mb: 5 }}>
-          I'm currently exploring godot and shader programming while working in another field as a part-time Client consultant and always looking to collaborate on meaningful tech projects that create impact.
+          I'm currently exploring godot, shader programming and procedural animation while working in another field as a part-time Client consultant (the world is a hard place and we do what we can to survive, ... yep) and always looking to collaborate on meaningful tech projects that create impact.
         </Typography>
         
         <Box display="flex" justifyContent="center">
