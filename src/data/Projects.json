@@ -45,6 +45,32 @@
       "src/assets/Images/Tetris/gameoverRedo.png",
       "src/assets/Images/Tetris/gameplay1.png"
     ],
-    "githubLink": "https://github.com/T-Fluffy/My3DChess/tree/main"
+    "githubLink": "https://github.com/T-Fluffy/Tetris"
+  },
+  {
+    "id": 5,
+    "title": "TopDownShooter2D",
+    "description": "A simple Unity 2D top-down survival shooting zombie game.",
+    "image": "src/assets/Images/TopDownShooter2D/Playmode.png",
+    "images": [
+      "src/assets/Images/TopdownShooter2D/Menu.png",
+      "src/assets/Images/TopDownShooter2D/Playmode.png",
+      "src/assets/Images/TopDownShooter2D/gameover.png"
+    ],
+    "githubLink": "https://github.com/T-Fluffy/TopDownShooter2D"
+  },
+  {
+    "id": 6,
+    "title": "Snapface",
+    "description": "An Angular project for a social media platform folowing the openclassroom project witha simple node backend.",
+    "image": "src/assets/Images/Snapface/home.jpg",
+    "images": [
+      "src/assets/Images/Snapface/home.jpg",
+      "src/assets/Images/Snapface/login.jpg",
+      "src/assets/Images/Snapface/PostsList.jpg", 
+      "src/assets/Images/Snapface/CreatePost.jpg",
+      "src/assets/Images/Snapface/Post.jpg"
+    ],
+    "githubLink": "https://github.com/T-Fluffy/Snapface"
   }
 ]

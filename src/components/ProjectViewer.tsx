@@ -7,7 +7,8 @@ import {
   IconButton,
   Typography,
   Box,
-  Link
+  Link,
+  paperClasses
 } from "@mui/material";
 import CloseIcon from "@mui/icons-material/Close";
 import Slider from "react-slick";
@@ -31,8 +32,9 @@ const ProjectViewer: React.FC<Props> = ({ open, project, onClose }) => {
   };
 
   return (
-    <Dialog open={open} onClose={onClose} fullWidth maxWidth="md">
-      <DialogTitle sx={{ display: "flex", justifyContent: "space-between", alignItems: "center" }}>
+    <Dialog open={open} onClose={onClose} fullWidth maxWidth="md" PaperProps={{ sx: { backgroundColor: "#1F2937" } }}
+  style={{ overflow: "hidden" }} >
+      <DialogTitle sx={{ display: "flex", justifyContent: "space-between", alignItems: "center",color:"white" }}>
         {project.title}
         <IconButton onClick={onClose}>
           <CloseIcon />
@@ -49,7 +51,7 @@ const ProjectViewer: React.FC<Props> = ({ open, project, onClose }) => {
           <Box component="img" src={project.image} alt={project.title} sx={{ width: "100%", borderRadius: 2, mb: 2 }} />
         )}
 
-        <Typography variant="body1" sx={{ mt: 2 }}>{project.description}</Typography>
+        <Typography variant="body1" sx={{ mt: 2, color: "white" }}>{project.description}</Typography>
 
         <Box sx={{ mt: 2 }}>
           <Link href={project.githubLink} target="_blank" underline="hover" sx={{ mr: 2 }}>
