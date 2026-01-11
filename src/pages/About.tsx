@@ -1,17 +1,22 @@
 import React from "react";
-import { Container, Typography, Box, Card, CardContent, Button, Paper } from "@mui/material";
+import { Container, Typography, Box, Card, CardContent, Button, Paper, Stack } from "@mui/material";
 import DownloadIcon from "@mui/icons-material/Download";
 import TerminalIcon from '@mui/icons-material/Terminal';
-import CV from "../assets/CV_TarekHalloul-fr.pdf?url"; 
+import LanguageIcon from '@mui/icons-material/Language';
 
 const About: React.FC = () => {
   const cyberBlue = "#00BFFF";
+
+  // Paths as you requested (no extensions)
+  // Note: For this to work, your files in /public/assets/ must not have .pdf in their filename either.
+  const Resume_English = "/assets/TarekHalloulEN";
+  const Resume_French = "/assets/TarekHalloulFR";
 
   return (
     <Container
       maxWidth="md"
       sx={{
-        mt: { xs: 5, md: 10 },
+        mt: { xs: 5, md: 12 },
         mb: 8,
         textAlign: "center",
         color: "white",
@@ -19,28 +24,23 @@ const About: React.FC = () => {
         zIndex: 1,
       }}
     >
-      {/* Header */}
       <Typography variant="h3" component="h1" gutterBottom fontWeight="bold" sx={{ color: cyberBlue }}>
         &lt; About Me /&gt;
       </Typography>
 
-      {/* Main Bio */}
       <Box sx={{ textAlign: "left", mb: 6 }}>
         <Typography variant="body1" sx={{ fontSize: "1.1rem", mb: 3, lineHeight: 1.8 }}>
           Hi! I'm <strong style={{ color: cyberBlue }}>Tarek Halloul</strong>, a software engineer and game developer. 
           I bridge the gap between robust backend logic with <strong style={{ color: cyberBlue }}>Spring Boot</strong> and 
           immersive interactive worlds using <strong style={{ color: cyberBlue }}>Unity and Godot</strong>. 
-          I don't just write code; I build experiences.
         </Typography>
 
         <Typography variant="body1" sx={{ fontSize: "1.1rem", mb: 3, lineHeight: 1.8 }}>
           With a Software Engineering degree from EPI School, I’ve navigated the transition from intern to instructor 
-          to full-stack developer. My passion lies in solving complex problems—whether it’s optimizing a web service 
-          or calculating procedural animations for a game character.
+          to full-stack developer.
         </Typography>
       </Box>
 
-      {/* The "SURVIVE" / Current Status Section */}
       <Paper 
         elevation={0}
         sx={{ 
@@ -49,7 +49,8 @@ const About: React.FC = () => {
           backgroundColor: "rgba(0, 0, 0, 0.4)", 
           borderLeft: `4px solid ${cyberBlue}`,
           textAlign: "left",
-          fontFamily: "monospace"
+          fontFamily: "monospace",
+          backdropFilter: "blur(10px)"
         }}
       >
         <Box sx={{ display: 'flex', alignItems: 'center', mb: 1 }}>
@@ -59,48 +60,53 @@ const About: React.FC = () => {
           </Typography>
         </Box>
         <Typography variant="body2" sx={{ color: "#aaa", fontStyle: "italic" }}>
-          "Currently exploring Godot, shader programming, and procedural animation. 
-          Balancing my passion with a part-time role as a Client Consultant—because the world is a hard place 
-          and we do what we can to <strong>SURVIVE</strong>. This grind only makes the code sharper."
+          "Currently exploring Godot and shader programming. Balancing my passion with a part-time role."
         </Typography>
       </Paper>
 
-      {/* Resume Card */}
       <Box display="flex" justifyContent="center">
         <Card 
           sx={{ 
-            minWidth: 300, 
-            backgroundColor: "rgba(31, 41, 55, 0.8)", 
+            minWidth: 320, 
+            maxWidth: 500,
+            backgroundColor: "rgba(20, 20, 25, 0.8)", 
             color: "white", 
-            border: `1px solid ${cyberBlue}`,
-            backdropFilter: "blur(5px)"
+            border: `1px solid rgba(0, 191, 255, 0.3)`,
+            backdropFilter: "blur(12px)",
           }}
         >
-          <CardContent>
-            <Typography variant="h6" gutterBottom sx={{ fontWeight: 'bold' }}>
+          <CardContent sx={{ p: 4 }}>
+            <Typography variant="h6" sx={{ fontWeight: 'bold', mb: 1 }}>
               Interested in the full specs?
             </Typography>
-            <Typography variant="body2" sx={{ mb: 2, color: "#ccc" }}>
-              Download my CV for the complete technical breakdown.
-            </Typography>
-            <Button
-              variant="outlined"
-              href={CV}
-              download
-              startIcon={<DownloadIcon />}
-              sx={{ 
-                mt: 1, 
-                color: cyberBlue, 
-                borderColor: cyberBlue,
-                "&:hover": {
-                    backgroundColor: "rgba(0, 191, 255, 0.1)",
-                    borderColor: "white",
-                    color: "white"
-                }
-              }}
-            >
-              Download PDF
-            </Button>
+            
+            <Stack direction={{ xs: 'column', sm: 'row' }} spacing={2} justifyContent="center">
+                <Button
+                  variant="outlined"
+                  href={Resume_English}
+                  download="Tarek_Halloul_Resume_EN.pdf"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  type="pdf" // Force browser to treat the binary data as PDF
+                  startIcon={<LanguageIcon />}
+                  sx={{ color: "white", borderColor: "rgba(255,255,255,0.2)" }}
+                >
+                  English CV
+                </Button>
+
+                <Button
+                  variant="contained"
+                  href={Resume_French}
+                  download="Tarek_Halloul_CV_FR.pdf"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  type="pdf" // Force browser to treat the binary data as PDF
+                  startIcon={<DownloadIcon />}
+                  sx={{ backgroundColor: cyberBlue, color: "black" }}
+                >
+                  CV Français
+                </Button>
+            </Stack>
           </CardContent>
         </Card>
       </Box>
