@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { AppBar, Toolbar, Typography, IconButton, Menu, MenuItem, Box, Button, useMediaQuery, useTheme, SvgIcon } from "@mui/material";
+import { AppBar, Toolbar, Typography, IconButton, Menu, MenuItem, Box, Button, useMediaQuery, useTheme } from "@mui/material";
 import MenuIcon from "@mui/icons-material/Menu";
 import { NavLink, useNavigate } from "react-router-dom";
 
@@ -49,10 +49,17 @@ const Navbar: React.FC = () => {
       }}
     >
       <Toolbar sx={{ justifyContent: "space-between" }}>
+        {/* LOGO - Sert maintenant de bouton HOME principal */}
         <Typography 
           variant="h6" 
           onClick={() => navigate("/")}
-          sx={{ cursor: "pointer", display: "flex", alignItems: "center", fontWeight: "bold", color: "white" }}
+          sx={{ 
+            cursor: "pointer", 
+            display: "flex", 
+            alignItems: "center", 
+            fontWeight: "bold", 
+            color: "white" 
+          }}
         >
           <Box component="span" sx={{ color: cyberBlue, mr: 0.5 }}>&gt;</Box>Tarek.Dev
         </Typography>
@@ -62,6 +69,7 @@ const Navbar: React.FC = () => {
             <IconButton onClick={handleMenuOpen} color="inherit"><MenuIcon /></IconButton>
             <Menu anchorEl={anchorEl} open={Boolean(anchorEl)} onClose={() => handleMenuClose()} 
               PaperProps={{ sx: { bgcolor: "#0a0a0f", color: "white", border: `1px solid ${cyberBlue}` } }}>
+              {/* On garde Home dans le menu mobile car c'est plus ergonomique sur téléphone */}
               <MenuItem onClick={() => handleMenuClose("/")}>Home</MenuItem>
               <MenuItem onClick={() => handleMenuClose("/about")}>About</MenuItem>
               <MenuItem onClick={() => handleMenuClose("/projects")}>Portfolio</MenuItem>
@@ -70,7 +78,7 @@ const Navbar: React.FC = () => {
           </>
         ) : (
           <Box sx={{ display: 'flex' }}>
-            <Button component={NavLink} to="/" sx={navItemStyles}>Home</Button>
+            {/* Bouton Home SUPPRIMÉ ici */}
             <Button component={NavLink} to="/about" sx={navItemStyles}>About</Button>
             <Button component={NavLink} to="/projects" sx={navItemStyles}>Portfolio</Button>
             <Button component={NavLink} to="/contact" sx={navItemStyles}>Contact</Button>
