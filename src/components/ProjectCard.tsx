@@ -24,7 +24,14 @@ const ProjectCard: React.FC<Props> = ({ project, onClick }) => {
         backgroundColor: "#121212",
         color: "#fff",
         display: "flex",
-        flexDirection: "column"
+        flexDirection: "column",
+        border: "1px solid rgba(0, 191, 255, 0.3)",
+        transition: "transform 0.3s, box-shadow 0.3s",
+        "&:hover": {
+          transform: "translateY(-8px)",
+          boxShadow: "0 0 20px rgba(0, 191, 255, 0.4)", // Glow effect
+          borderColor: "#00bfff",
+        }
       }}
     >
       <CardActionArea onClick={onClick}>

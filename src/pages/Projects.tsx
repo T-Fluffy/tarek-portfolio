@@ -2,7 +2,6 @@ import React, { useState } from "react";
 import { Grid, Container, Typography } from "@mui/material";
 import type { Project } from "../types/Project";
 import ProjectCard from "../components/ProjectCard";
-import CanvasBackground from "../components/UI/CanvasBackground";
 import ProjectViewer from "../components/ProjectViewer";
 
 // Load projects from external JSON file
@@ -13,10 +12,9 @@ const Projects: React.FC = () => {
 
   return (
     <>
-      <CanvasBackground />
       <Container sx={{ py: 10, position: "relative", zIndex: 1 }}>
         <Typography variant="h3" align="center" color="cyan" gutterBottom>
-          // Portfolio
+          Portfolio
         </Typography>
         <Typography variant="body1" sx={{ fontSize: "1.2rem", mb: 3, textAlign: "center" }}>
           Here are some of the projects I've worked on.

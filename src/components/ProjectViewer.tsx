@@ -7,8 +7,7 @@ import {
   IconButton,
   Typography,
   Box,
-  Link,
-  paperClasses
+  Link
 } from "@mui/material";
 import CloseIcon from "@mui/icons-material/Close";
 import Slider from "react-slick";
