@@ -1,17 +1,16 @@
 import { Routes, Route, useLocation } from "react-router-dom";
 import { useEffect } from "react";
 import Navbar from "./components/UI/Navbar";
+import Footer from "./components/UI/Footer"; // Import the new cooler footer
 import Home from "./pages/Home";
 import About from "./pages/About";
 import Projects from "./pages/Projects";
 import Contact from "./pages/Contact";
 import CanvasBackground from "./components/UI/CanvasBackground";
 
-// Import slick carousel styles
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 
-// A small helper component to ensure the page starts at the top when navigating
 const ScrollToTop = () => {
   const { pathname } = useLocation();
   useEffect(() => {
@@ -21,8 +20,6 @@ const ScrollToTop = () => {
 };
 
 const App: React.FC = () => {
-  const cyberBlue = "#00BFFF";
-
   return (
     <div
       style={{
@@ -32,18 +29,19 @@ const App: React.FC = () => {
         position: "relative",
         zIndex: 1,
         color: "white",
-        backgroundColor: "#050505", // Deep background base
+        backgroundColor: "#050505",
       }}
     >
       <CanvasBackground />
       <ScrollToTop />
       <Navbar />
 
-      {/* Adding a slight fade-in animation container */}
       <main style={{ 
         flex: 1, 
         padding: "1rem",
-        animation: "fadeIn 0.8s ease-in" 
+        animation: "fadeIn 0.8s ease-in",
+        position: "relative",
+        zIndex: 2
       }}>
         <Routes>
           <Route path="/" element={<Home />} />
@@ -53,25 +51,9 @@ const App: React.FC = () => {
         </Routes>
       </main>
 
-      <footer
-        style={{
-          padding: "2rem",
-          textAlign: "center",
-          backgroundColor: "rgba(10, 10, 15, 0.9)",
-          backdropFilter: "blur(5px)",
-          borderTop: `1px solid rgba(0, 191, 255, 0.2)`,
-          color: "rgba(255, 255, 255, 0.6)",
-          fontSize: "0.9rem",
-          fontFamily: "monospace"
-        }}
-      >
-        <div style={{ marginBottom: "8px" }}>
-          SYSTEM_VERSION: <span style={{ color: cyberBlue }}>2.0.24</span>
-        </div>
-        © {new Date().getFullYear()} Tarek.Dev | Built with React & <span style={{ color: cyberBlue }}>Digital Rain</span>
-      </footer>
+      {/* The new Footer component replaces the old inline div */}
+      <Footer />
 
-      {/* Inline styles for the fade-in effect */}
       <style>
         {`
           @keyframes fadeIn {
