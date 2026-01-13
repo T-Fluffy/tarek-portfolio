@@ -7,10 +7,8 @@ import LanguageIcon from '@mui/icons-material/Language';
 const About: React.FC = () => {
   const cyberBlue = "#00BFFF";
 
-  // Paths as you requested (no extensions)
-  // Note: For this to work, your files in /public/assets/ must not have .pdf in their filename either.
-  const Resume_English = "/assets/TarekHalloulEN";
-  const Resume_French = "/assets/TarekHalloulFR";
+  const Resume_English = "/assets/TarekHalloulEN.pdf";
+  const Resume_French = "/assets/TarekHalloulFR.pdf";
 
   return (
     <Container
@@ -87,7 +85,7 @@ const About: React.FC = () => {
                   download="Tarek_Halloul_Resume_EN.pdf"
                   target="_blank"
                   rel="noopener noreferrer"
-                  type="pdf" // Force browser to treat the binary data as PDF
+                  type="application/pdf" // Force browser to treat the binary data as PDF
                   startIcon={<LanguageIcon />}
                   sx={{ color: "white", borderColor: "rgba(255,255,255,0.2)" }}
                 >
@@ -97,10 +95,10 @@ const About: React.FC = () => {
                 <Button
                   variant="contained"
                   href={Resume_French}
-                  download="Tarek_Halloul_CV_FR.pdf"
+                  download="Tarek_Halloul_Resume_FR.pdf"
                   target="_blank"
                   rel="noopener noreferrer"
-                  type="pdf" // Force browser to treat the binary data as PDF
+                  type="application/pdf" // Force browser to treat the binary data as PDF
                   startIcon={<DownloadIcon />}
                   sx={{ backgroundColor: cyberBlue, color: "black" }}
                 >
