@@ -7,4 +7,5 @@ export interface Project {
   images?: string[];
   githubLink?: string;
   liveLink?: string;
+  technologies?: string[];
 }

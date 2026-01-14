@@ -9,7 +9,8 @@
       "src/assets/Images/2048/Menu.png",
       "src/assets/Images/2048/gameover.png"
     ],
-    "githubLink": "https://github.com/T-Fluffy/Project_2048"
+    "githubLink": "https://github.com/T-Fluffy/Project_2048",
+    "technologies": ["Unity", "C#", "HLSL", "Post-Processing"]
   },
   {
     "id": 2,
@@ -20,7 +21,8 @@
       "src/assets/Images/Pacman/startgame.png",
       "src/assets/Images/Pacman/gameplay.png"
     ],
-    "githubLink": "https://github.com/T-Fluffy/Pacman"
+    "githubLink": "https://github.com/T-Fluffy/Pacman",
+    "technologies": ["Unity", "C#", "HLSL", "Post-Processing"]
   },
   {
     "id": 3,
@@ -32,20 +34,22 @@
       "src/assets/Images/My3DChess/start.png",
       "src/assets/Images/My3DChess/online-mode.png"
     ],
-    "githubLink": "https://github.com/T-Fluffy/My3DChess/tree/main"
+    "githubLink": "https://github.com/T-Fluffy/My3DChess/tree/main",
+    "technologies": ["Unity", "C#", "HLSL", "Post-Processing"]
   },
   {
     "id": 4,
     "title": "Tetris",
     "description": "A Tilemap Unity Tetris game.",
-    "image": "src/assets/Images/",
+    "image": "src/assets/Images/Tetris/gameplay.png",
     "images": [
       "src/assets/Images/Tetris/gameplay.png",
       "src/assets/Images/Tetris/Menu.png",
       "src/assets/Images/Tetris/gameoverRedo.png",
       "src/assets/Images/Tetris/gameplay1.png"
     ],
-    "githubLink": "https://github.com/T-Fluffy/Tetris"
+    "githubLink": "https://github.com/T-Fluffy/Tetris",
+    "technologies": ["Unity", "C#", "HLSL", "Post-Processing"]
   },
   {
     "id": 5,
@@ -57,12 +61,13 @@
       "src/assets/Images/TopDownShooter2D/Playmode.png",
       "src/assets/Images/TopDownShooter2D/gameover.png"
     ],
-    "githubLink": "https://github.com/T-Fluffy/TopDownShooter2D"
+    "githubLink": "https://github.com/T-Fluffy/TopDownShooter2D",
+    "technologies": ["Unity", "C#", "HLSL", "Post-Processing"]
   },
   {
     "id": 6,
     "title": "Snapface",
-    "description": "An Angular project for a social media platform folowing the openclassroom project witha simple node backend.",
+    "description": "An Angular project for a social media platform following the openclassroom project with a simple node backend.",
     "image": "src/assets/Images/Snapface/home.jpg",
     "images": [
       "src/assets/Images/Snapface/home.jpg",
@@ -71,6 +76,7 @@
       "src/assets/Images/Snapface/CreatePost.jpg",
       "src/assets/Images/Snapface/Post.jpg"
     ],
-    "githubLink": "https://github.com/T-Fluffy/Snapface"
+    "githubLink": "https://github.com/T-Fluffy/Snapface",
+    "technologies": ["Angular", "Node.js", "TypeScript"]
   }
 ]
