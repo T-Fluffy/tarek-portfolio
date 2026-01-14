@@ -81,9 +81,8 @@ const Home: React.FC = () => {
                 options={{
                   strings: [
                     'Software Engineer',
-                    'Fullstack Developer',
                     'Game Developer',
-                    'Procedural Enthusiast'
+                    'Fullstack Developer'
                   ],
                   autoStart: true,
                   loop: true,
