@@ -133,7 +133,6 @@ const Contact: React.FC = () => {
           </Box>
         </Grid>
 
-        {/* RIGHT COLUMN: Wajih-Style Info Cards */}
         <Grid size={{ xs: 12, md: 5 }}>
           <Stack spacing={2}>
             <InfoCard 

@@ -1,5 +1,5 @@
 import React from "react";
-import { Container, Typography, Box, Card, CardContent, Button, Paper, Stack, Chip } from "@mui/material";
+import { Container, Typography, Box, Card, CardContent, Button, Paper, Stack } from "@mui/material";
 import DownloadIcon from "@mui/icons-material/Download";
 import TerminalIcon from '@mui/icons-material/Terminal';
 import LanguageIcon from '@mui/icons-material/Language';
