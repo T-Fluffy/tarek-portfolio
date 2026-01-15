@@ -16,21 +16,17 @@ const Projects: React.FC = () => {
         const data = await response.json();
 
         const mappedProjects: Project[] = data
-          .filter((repo: any) => 
-            !repo.fork && 
-            repo.name.toLowerCase() !== "t-fluffy"
-          )
+          .filter((repo: any) => !repo.fork && repo.name.toLowerCase() !== "t-fluffy")
           .map((repo: any) => {
-            const githubRawUrl = `https://github.com/T-Fluffy/${repo.name}/blob/${repo.default_branch}/social-preview.png?raw=true`;
-
+            const branch = repo.default_branch || "main";
             return {
               id: repo.id.toString(),
               title: repo.name.replace(/-/g, ' ').toUpperCase(),
               description: repo.description || "System data encrypted. No description provided.",
-              imageUrl: githubRawUrl,
-              technologies: [repo.language, ...(repo.topics || [])].filter(Boolean),
+              imageUrl: `https://github.com/T-Fluffy/${repo.name}/blob/${branch}/social-preview.png?raw=true`,
+              technologies: [repo.language, ...(repo.topics || [])].filter(Boolean) as string[],
               githubLink: repo.html_url,
-              liveLink: repo.homepage || "",
+              live: repo.homepage || "",
               image: repo.name 
             };
           });
