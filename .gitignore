@@ -1,6 +1,8 @@
-# Logs
+# Logs & System
 logs
 *.log
+.DS_Store
+Thumbs.db
 
 # Node / React
 node_modules/
@@ -8,17 +10,25 @@ dist/
 dist-ssr/
 .env
 .env.local
+.eslintcache
+.vitest-root/ # Vitest cache
 
-# .NET Specific - CRITICAL
+# .NET Specific
 **/bin/
 **/obj/
+**/publish/
+.vs/
+# Ignore actual settings but allow the example template
 **/appsettings.json
+**/appsettings.Development.json
 !**/appsettings.Example.json
 
 # Visual Studio / Editors
-.vscode/
+.vscode/*
+!.vscode/extensions.json
 .idea/
 *.sln
 *.user
 *.suo
-.DS_Store
+*.db
+*.db-journal

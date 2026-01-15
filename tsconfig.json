@@ -1,4 +1,11 @@
 {
+  "compilerOptions": {
+    // ... other options
+    "forceConsistentCasingInFileNames": true,
+    "skipLibCheck": true,
+    "esModuleInterop": true
+    // ...
+  },
   "files": [],
   "references": [
     { "path": "./tsconfig.app.json" },

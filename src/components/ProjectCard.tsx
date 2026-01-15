@@ -1,6 +1,14 @@
 import React, { useState } from "react";
 import type { Project } from "../types/Project";
-import { Card, CardContent, Typography, CardActionArea, Box } from "@mui/material";
+import { 
+  Card, 
+  CardContent, 
+  Typography, 
+  CardActionArea, 
+  Box, 
+  Chip, 
+  Stack 
+} from "@mui/material";
 
 interface Props {
   project: Project;
@@ -8,7 +16,7 @@ interface Props {
 }
 
 const ProjectCard: React.FC<Props> = ({ project, onClick }) => {
-  // Use state to track which image we are trying to load
+  // Image handling with fallbacks
   const [imgSrc, setImgSrc] = useState(project.imageUrl);
   const [retryCount, setRetryCount] = useState(0);
 
@@ -18,7 +26,7 @@ const ProjectCard: React.FC<Props> = ({ project, onClick }) => {
       setImgSrc(`https://socialify.git.ci/T-Fluffy/${project.image}/image?theme=Dark&pattern=Circuit%20Board`);
       setRetryCount(1);
     } else if (retryCount === 1) {
-      // Step 2: Socialify failed -> Try a solid placeholder with the project name
+      // Step 2: Socialify failed -> Try a solid placeholder
       setImgSrc(`https://placehold.co/600x400/001219/00BFFF?text=${project.image}`);
       setRetryCount(2);
     }
@@ -31,6 +39,8 @@ const ProjectCard: React.FC<Props> = ({ project, onClick }) => {
         bgcolor: "#121212", 
         border: "1px solid rgba(0, 255, 255, 0.2)",
         transition: "0.3s",
+        display: "flex",
+        flexDirection: "column",
         "&:hover": {
           borderColor: "cyan",
           transform: "translateY(-5px)",
@@ -38,7 +48,16 @@ const ProjectCard: React.FC<Props> = ({ project, onClick }) => {
         }
       }}
     >
-      <CardActionArea onClick={onClick}>
+      <CardActionArea 
+        onClick={onClick} 
+        sx={{ 
+          flexGrow: 1, 
+          display: 'flex', 
+          flexDirection: 'column', 
+          alignItems: 'stretch' 
+        }}
+      >
+        {/* Project Preview Image */}
         <Box sx={{ width: "100%", height: 200, bgcolor: "#000", overflow: "hidden" }}>
           <img
             src={imgSrc}
@@ -52,23 +71,62 @@ const ProjectCard: React.FC<Props> = ({ project, onClick }) => {
             }}
           />
         </Box>
-        <CardContent>
-          <Typography variant="h6" sx={{ color: "cyan", fontFamily: "monospace", fontSize: "1.1rem" }}>
+
+        <CardContent sx={{ flexGrow: 1, display: 'flex', flexDirection: 'column' }}>
+          {/* Project Title */}
+          <Typography 
+            variant="h6" 
+            sx={{ 
+              color: "cyan", 
+              fontFamily: "monospace", 
+              fontSize: "1.1rem", 
+              mb: 1,
+              textTransform: 'uppercase'
+            }}
+          >
             {project.title}
           </Typography>
+          
+          {/* Project Description */}
           <Typography 
             variant="body2" 
             sx={{ 
               color: "#aaa", 
-              mt: 1,
+              mb: 2,
               display: "-webkit-box",
               WebkitLineClamp: 2,
               WebkitBoxOrient: "vertical",
-              overflow: "hidden"
+              overflow: "hidden",
+              minHeight: "3em"
             }}
           >
             {project.description}
           </Typography>
+
+          {/* Technology Chips - Added the ?. mapping to prevent undefined errors */}
+          <Stack 
+            direction="row" 
+            spacing={1} 
+            flexWrap="wrap" 
+            useFlexGap 
+            sx={{ mt: 'auto' }} // Pushes chips to the bottom of the content area
+          >
+            {project.technologies?.map((tech) => (
+              <Chip 
+                key={tech} 
+                label={tech} 
+                size="small" 
+                sx={{ 
+                  bgcolor: "rgba(0, 255, 255, 0.05)", 
+                  color: "cyan", 
+                  border: "1px solid rgba(0, 255, 255, 0.2)",
+                  fontFamily: "monospace",
+                  fontSize: "0.65rem",
+                  height: "20px"
+                }} 
+              />
+            ))}
+          </Stack>
         </CardContent>
       </CardActionArea>
     </Card>

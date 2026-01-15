@@ -43,6 +43,15 @@ A high-performance, cyberpunk-inspired developer portfolio. This system features
 - [x] **Global Styling**: Finished the "Terminal" aesthetic for all project cards and details.
 
 ---
+## 🧪 Testing Suite
+
+### Backend (xUnit)
+- **Unit Tests**: Validating `ContactRequest` models.
+- **Service Tests**: Ensuring `FluentEmail` configuration is valid.
+
+### Frontend (Vitest)
+- **Component Tests**: Verifying `ProjectCard` and `ProjectDetails` render dynamic GitHub data correctly.
+- **Logic Tests**: Testing the Socialify fallback URL generation.
 
 ## 📦 Local Deployment
 
