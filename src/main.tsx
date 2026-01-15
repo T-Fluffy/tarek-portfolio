@@ -10,7 +10,7 @@ import ErrorBoundary from './components/ErrorBoundary.tsx';
 const root = createRoot(document.getElementById('root') as HTMLElement);
 root.render(
   <React.StrictMode>
-    <BrowserRouter>
+    <BrowserRouter basename="/tarek-portfolio">
       <ErrorBoundary>
         <App />
       </ErrorBoundary>
