@@ -21,10 +21,7 @@ const Projects: React.FC = () => {
             repo.name.toLowerCase() !== "t-fluffy"
           )
           .map((repo: any) => {
-            const branch = repo.default_branch || "main";
-            // The timestamp (?t=) prevents the browser from showing an old 404 result
-            const timestamp = new Date().getTime();
-            const githubRawUrl = `https://raw.githubusercontent.com/T-Fluffy/${repo.name}/${branch}/social-preview.png?t=${timestamp}`;
+            const githubRawUrl = `https://github.com/T-Fluffy/${repo.name}/blob/${repo.default_branch}/social-preview.png?raw=true`;
 
             return {
               id: repo.id.toString(),

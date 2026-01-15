@@ -23,16 +23,19 @@ const ProjectDetails: React.FC = () => {
         if (!response.ok) throw new Error("Repo not found");
         
         const repo = await response.json();
+        const branch = repo.default_branch || "main";
 
         // Map GitHub API to your Project Type
         const mappedProject: Project = {
           id: repo.id.toString(),
           title: repo.name.replace(/-/g, ' ').toUpperCase(),
           description: repo.description || "No description provided in GitHub logs.",
-          imageUrl: `https://raw.githubusercontent.com/T-Fluffy/${repo.name}/${repo.default_branch}/social-preview.png`,
+          // Use the ?raw=true format to support Git LFS files
+          imageUrl: `https://github.com/T-Fluffy/${repo.name}/blob/${branch}/social-preview.png?raw=true`,
           technologies: [repo.language, ...(repo.topics || [])].filter(Boolean),
           githubLink: repo.html_url,
-          live: repo.homepage || ""
+          live: repo.homepage || "",
+          image: repo.name // Store the raw repo name for the fallback logic
         };
 
         setProject(mappedProject);
@@ -50,7 +53,7 @@ const ProjectDetails: React.FC = () => {
     return (
       <Container sx={{ py: 20, textAlign: 'center' }}>
         <CircularProgress sx={{ color: cyberBlue }} />
-        <Typography sx={{ color: '#aaa', mt: 2 }}>DECRYPTING_PROJECT_DATA...</Typography>
+        <Typography sx={{ color: '#aaa', mt: 2, fontFamily: 'monospace' }}>DECRYPTING_PROJECT_DATA...</Typography>
       </Container>
     );
   }
@@ -58,7 +61,7 @@ const ProjectDetails: React.FC = () => {
   if (!project) {
     return (
       <Container sx={{ py: 20, textAlign: 'center' }}>
-        <Typography variant="h4" sx={{ color: 'white' }}>[ERROR]: PROJECT_NOT_FOUND</Typography>
+        <Typography variant="h4" sx={{ color: 'white', fontFamily: 'monospace' }}>[ERROR]: PROJECT_NOT_FOUND</Typography>
         <Button onClick={() => navigate('/projects')} sx={{ mt: 4, color: cyberBlue }}>
           RETURN_TO_BASE
         </Button>
@@ -74,36 +77,40 @@ const ProjectDetails: React.FC = () => {
           <Button 
             startIcon={<ArrowBackIcon />} 
             onClick={() => navigate('/projects')}
-            sx={{ color: "rgba(255,255,255,0.5)", "&:hover": { color: cyberBlue } }}
+            sx={{ color: "rgba(255,255,255,0.5)", "&:hover": { color: cyberBlue }, fontFamily: 'monospace' }}
           >
             BACK_TO_GALLERY
           </Button>
         </Stack>
 
         <Grid container spacing={6}>
-          <Grid size={{ xs: 12, md: 7 }} >
+          <Grid size={{ xs: 12, md: 7 }}>
             <Box sx={{ 
               borderRadius: 2, 
               overflow: 'hidden', 
               border: `1px solid rgba(0, 191, 255, 0.2)`,
-              bgcolor: '#000'
+              bgcolor: '#000',
+              boxShadow: `0 0 20px rgba(0, 191, 255, 0.1)`
             }}>
               <Box 
                 component="img" 
                 src={project.imageUrl} 
                 onError={(e: any) => {
-                    e.target.src = `https://socialify.git.ci/T-Fluffy/${project.title.toLowerCase().replace(/ /g, '-')}/image?theme=Dark`;
+                    const fallback = `https://socialify.git.ci/T-Fluffy/${project.image}/image?theme=Dark&pattern=Circuit%20Board`;
+                    if (e.target.src !== fallback) {
+                        e.target.src = fallback;
+                    }
                 }}
                 sx={{ width: '100%', aspectRatio: '16/9', objectFit: 'cover', display: "block" }} 
               />
             </Box>
           </Grid>
 
-          <Grid size={{ xs: 12, md: 5 }}>
-            <Typography variant="overline" sx={{ color: cyberBlue, fontWeight: 'bold', letterSpacing: 3 }}>
+          <Grid size={{ xs: 12, md: 5}}>
+            <Typography variant="overline" sx={{ color: cyberBlue, fontWeight: 'bold', letterSpacing: 3, fontFamily: 'monospace' }}>
               PROJECT_IDENTIFIER: {project.id}
             </Typography>
-            <Typography variant="h2" sx={{ color: "white", fontWeight: "bold", mb: 3, textTransform: 'uppercase', fontSize: { xs: '2.5rem', md: '3.5rem' } }}>
+            <Typography variant="h2" sx={{ color: "white", fontWeight: "bold", mb: 3, textTransform: 'uppercase', fontSize: { xs: '2.5rem', md: '3.5rem' }, fontFamily: 'monospace' }}>
               {project.title}
             </Typography>
 
@@ -111,7 +118,8 @@ const ProjectDetails: React.FC = () => {
               p: 3, 
               bgcolor: "rgba(255,255,255,0.02)", 
               borderLeft: `4px solid ${cyberBlue}`,
-              mb: 4 
+              mb: 4,
+              borderRadius: '0 8px 8px 0'
             }}>
               <Typography variant="body1" sx={{ color: "#aaa", lineHeight: 1.8 }}>
                 {project.description}
@@ -124,7 +132,7 @@ const ProjectDetails: React.FC = () => {
                   key={tech} 
                   label={tech} 
                   size="small"
-                  sx={{ color: cyberBlue, border: `1px solid rgba(0, 191, 255, 0.2)`, mb: 1, bgcolor: 'transparent' }} 
+                  sx={{ color: cyberBlue, border: `1px solid rgba(0, 191, 255, 0.2)`, mb: 1, bgcolor: 'transparent', fontFamily: 'monospace' }} 
                 />
               ))}
             </Stack>
@@ -136,7 +144,7 @@ const ProjectDetails: React.FC = () => {
                   startIcon={<GitHubIcon />}
                   href={project.githubLink}
                   target="_blank"
-                  sx={{ bgcolor: cyberBlue, color: "black", fontWeight: 'bold', "&:hover": { bgcolor: 'white' } }}
+                  sx={{ bgcolor: cyberBlue, color: "black", fontWeight: 'bold', fontFamily: 'monospace', "&:hover": { bgcolor: 'white' } }}
                 >
                   SOURCE_CODE
                 </Button>
@@ -147,7 +155,7 @@ const ProjectDetails: React.FC = () => {
                     startIcon={<LaunchIcon />} 
                     href={project.live}
                     target="_blank"
-                    sx={{ borderColor: cyberBlue, color: cyberBlue }}
+                    sx={{ borderColor: cyberBlue, color: cyberBlue, fontFamily: 'monospace', "&:hover": { borderColor: 'white', color: 'white' } }}
                   >
                     LIVE_DEMO
                   </Button>
