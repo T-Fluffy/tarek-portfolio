@@ -1,5 +1,7 @@
 using System.Net;
 using System.Net.Mail;
+using Microsoft.AspNetCore.RateLimiting;
+using System.Threading.RateLimiting;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -14,6 +16,18 @@ builder.Services.AddCors(options => {
                         .AllowAnyMethod()
                         .AllowAnyHeader()
                         .SetIsOriginAllowedToAllowWildcardSubdomains());
+});
+
+// 3. Add Rate Limiting Policy
+builder.Services.AddRateLimiter(options =>
+{
+    options.AddFixedWindowLimiter(policyName: "fixed", options =>
+    {
+        options.PermitLimit = 3;             // Max 3 transmissions
+        options.Window = TimeSpan.FromMinutes(1); // Per 1 minute
+        options.QueueProcessingOrder = QueueProcessingOrder.OldestFirst;
+        options.QueueLimit = 0;              // Reject immediately if limit hit
+    });
 });
 
 // 2. Configure FluentEmail
@@ -32,7 +46,7 @@ var app = builder.Build();
 
 // CRITICAL: UseCors must come BEFORE MapControllers
 app.UseCors("AllowReactApp");
+app.UseRateLimiter();
 
 app.MapControllers();
-
 app.Run();

@@ -1,9 +1,11 @@
 using Microsoft.AspNetCore.Mvc;
 using FluentEmail.Core;
 using Portfolio.Backend.Models;
+using Microsoft.AspNetCore.RateLimiting;
 
 [ApiController]
 [Route("api/[controller]")]
+[EnableRateLimiting("fixed")]
 public class ContactController : ControllerBase
 {
     private readonly IFluentEmail _email;
@@ -17,7 +19,7 @@ public class ContactController : ControllerBase
     public async Task<IActionResult> SendTransmission([FromBody] ContactRequest request)
     {
         var email = _email
-            .To("Halloultarek1@gmail.com") // Your email
+            .To("Halloultarek1@gmail.com") // the email
             .Subject($"[PORTFOLIO] {request.Subject}")
             .Body($@"
                 New Transmission Received:
