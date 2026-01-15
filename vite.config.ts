@@ -1,9 +1,12 @@
-import { defineConfig } from 'vite'
-import react from '@vitejs/plugin-react-swc'
-
+import { defineConfig } from 'vite';
+import react from '@vitejs/plugin-react';
 
 export default defineConfig({
-  plugins: [
-    react(),
-  ],
-})
+  plugins: [react()],
+  base: '/tarek-portfolio/', 
+  test: {
+    globals: true,
+    environment: 'happy-dom',
+    setupFiles: './src/test/setup.ts',
+  },
+} as any);
