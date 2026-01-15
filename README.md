@@ -1,48 +1,54 @@
 # 💼 Tarek.dev — Developer Portfolio
 
-A clean and responsive developer portfolio website built with **React**, **TypeScript**, and **Material UI**.  
-This site showcases my projects, contact info, and a brief background — all wrapped in a modern UI.
+A high-performance, cyberpunk-inspired developer portfolio built with **React**, **TypeScript**, and **Material UI**. This site doesn't just show projects; it actively syncs with the GitHub API to fetch live data.
 
-![Screenshot](./screenshot.png)
-
----
-
-## 🚀 Features
-
-- 🌐 **Single Page Application** with React Router
-- 🎨 **Material UI** for modern responsive design
-- ⚙️ **TypeScript** for type-safe development
-- 📱 Fully responsive — optimized for mobile and desktop
-- 📁 Pages:
-  - **Home** – Intro & welcome
-  - **About** – Who I am
-  - **Projects** – Highlighted works
-  - **Contact** – Get in touch
+![Social Preview](./social-preview.png)
 
 ---
 
-## 🛠️ Tech Stack
+## 🚀 Live Features
 
-| Tool           | Description                           |
-|----------------|---------------------------------------|
-| [React](https://reactjs.org/) | UI library for building components |
-| [TypeScript](https://www.typescriptlang.org/) | Strongly-typed JavaScript |
-| [React Router](https://reactrouter.com/) | Routing between pages |
-| [Material UI](https://mui.com/) | Component library with responsive design |
-| [Vite](https://vitejs.dev/) *(optional)* | Fast build tool for development |
+- ⚡ **Dynamic Repository Sync**: Automatically fetches and decrypts project data directly from GitHub.
+- 🖼️ **Adaptive Image Loading**: Uses custom `social-preview.png` assets with an automatic **Socialify** fallback for a seamless UI.
+- 🎨 **Modern Cyber-Aesthetic**: Custom-themed Material UI components with glowing states and glassmorphism.
+- 📱 **Responsive Grid**: Fully optimized for mobile, tablet, and desktop interfaces.
+- 📁 **Modular Architecture**: 
+  - **Terminal/Home** – Main interface entry.
+  - **Project Gallery** – Dynamic grid of live repositories.
+  - **Project Details** – High-resolution view of source code and live demos.
 
 ---
 
-## 📦 Installation
+## 🛠️ Technical Arsenal
+
+| Tool | Capability |
+| :--- | :--- |
+| **React 18** | Component-based UI architecture |
+| **TypeScript** | Strict type-safety across the project |
+| **Material UI (MUI)** | Advanced styling and responsive grid systems |
+| **GitHub API** | Real-time project data fetching |
+| **Vite** | Lightning-fast build and dev environment |
+
+---
+
+## ⚙️ Development Progress: Latest Updates
+
+- [x] **GitHub Integration**: Implemented dynamic project fetching in `Projects.tsx`.
+- [x] **Smart Branch Detection**: System now automatically detects `main` vs `master` branches.
+- [x] **Visual Identity**: Integrated `social-preview.png` for all repository cards.
+- [x] **Error Handling**: Established "base-to-gallery" navigation for missing data.
+
+---
+
+## 📦 Local Deployment
 
 ```bash
-# Clone the repository
-git clone https://github.com/your-username/tarek-portfolio.git
+# 1. Clone the repository
+git clone [https://github.com/T-Fluffy/tarek-portfolio.git](https://github.com/T-Fluffy/tarek-portfolio.git)
 cd tarek-portfolio
 
-# Install dependencies
+# 2. Install dependencies
 npm install
 
-# Run in development
+# 3. Boot the local server
 npm run dev
-```

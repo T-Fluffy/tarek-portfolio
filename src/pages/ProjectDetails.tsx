@@ -1,38 +1,59 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { useParams, useNavigate } from "react-router-dom";
-import { Container, Typography, Box, Grid, Button, Stack, Chip, Paper, Fade } from "@mui/material";
+import { Container, Typography, Box, Grid, Button, Stack, Chip, Paper, Fade, CircularProgress } from "@mui/material";
 import ArrowBackIcon from '@mui/icons-material/ArrowBack';
 import GitHubIcon from "@mui/icons-material/GitHub";
 import LaunchIcon from "@mui/icons-material/Launch";
-import ArrowForwardIcon from '@mui/icons-material/ArrowForward';
-import Slider from "react-slick";
 
 import type { Project } from "../types/Project";
-import Portfolio from "../data/projects.json";
 
 const ProjectDetails: React.FC = () => {
   const { projectId } = useParams<{ projectId: string }>();
   const navigate = useNavigate();
+  const [project, setProject] = useState<Project | null>(null);
+  const [loading, setLoading] = useState(true);
   const cyberBlue = "#00BFFF";
 
-  const projects = Portfolio as Project[];
-  const projectIndex = projects.findIndex((p) => String(p.id) === projectId);
-  const project = projects[projectIndex];
-  const nextProject = projects[(projectIndex + 1) % projects.length];
-
-  // Helper to fix broken paths on sub-routes
-  const formatPath = (path: string) => {
-    if (!path) return "";
-    return path.startsWith("/") ? path : `/${path}`;
-  };
-
   useEffect(() => {
-    if (project) {
-      document.title = `${project.title} | Tarek.Dev`;
-      window.scrollTo(0, 0);
-    }
-    return () => { document.title = "Tarek Halloul | Portfolio"; };
-  }, [project]);
+    const fetchRepoDetails = async () => {
+      try {
+        setLoading(true);
+        // Fetch specific repo by ID
+        const response = await fetch(`https://api.github.com/repositories/${projectId}`);
+        if (!response.ok) throw new Error("Repo not found");
+        
+        const repo = await response.json();
+
+        // Map GitHub API to your Project Type
+        const mappedProject: Project = {
+          id: repo.id.toString(),
+          title: repo.name.replace(/-/g, ' ').toUpperCase(),
+          description: repo.description || "No description provided in GitHub logs.",
+          imageUrl: `https://raw.githubusercontent.com/T-Fluffy/${repo.name}/${repo.default_branch}/social-preview.png`,
+          technologies: [repo.language, ...(repo.topics || [])].filter(Boolean),
+          githubLink: repo.html_url,
+          live: repo.homepage || ""
+        };
+
+        setProject(mappedProject);
+      } catch (error) {
+        console.error("Uplink Error:", error);
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    fetchRepoDetails();
+  }, [projectId]);
+
+  if (loading) {
+    return (
+      <Container sx={{ py: 20, textAlign: 'center' }}>
+        <CircularProgress sx={{ color: cyberBlue }} />
+        <Typography sx={{ color: '#aaa', mt: 2 }}>DECRYPTING_PROJECT_DATA...</Typography>
+      </Container>
+    );
+  }
 
   if (!project) {
     return (
@@ -45,66 +66,44 @@ const ProjectDetails: React.FC = () => {
     );
   }
 
-  const sliderSettings = {
-    dots: true,
-    infinite: true,
-    speed: 500,
-    slidesToShow: 1,
-    slidesToScroll: 1,
-    autoplay: true,
-    autoplaySpeed: 4000,
-  };
-
   return (
     <Fade in={true} timeout={800}>
       <Container maxWidth="lg" sx={{ py: { xs: 10, md: 15 }, position: "relative", zIndex: 1 }}>
         
-        <Stack direction="row" justifyContent="space-between" alignItems="center" sx={{ mb: 4 }}>
+        <Stack direction="row" sx={{ mb: 4 }}>
           <Button 
             startIcon={<ArrowBackIcon />} 
             onClick={() => navigate('/projects')}
-            sx={{ color: "rgba(255,255,255,0.5)", "&:hover": { color: cyberBlue, bgcolor: 'transparent' } }}
+            sx={{ color: "rgba(255,255,255,0.5)", "&:hover": { color: cyberBlue } }}
           >
             BACK_TO_GALLERY
           </Button>
         </Stack>
 
-        {/* Grid Syntax matching your Projects.tsx exactly */}
         <Grid container spacing={6}>
-          
-          <Grid size={{ xs: 12, md: 7 }}>
+          <Grid size={{ xs: 12, md: 7 }} >
             <Box sx={{ 
               borderRadius: 2, 
               overflow: 'hidden', 
               border: `1px solid rgba(0, 191, 255, 0.2)`,
               bgcolor: '#000'
             }}>
-              {project.images && project.images.length > 0 ? (
-                <Slider {...sliderSettings}>
-                  {project.images.map((img, i) => (
-                    <Box 
-                      key={i} 
-                      component="img" 
-                      src={formatPath(img)} 
-                      sx={{ width: '100%', aspectRatio: '16/9', objectFit: 'cover', display: "block" }} 
-                    />
-                  ))}
-                </Slider>
-              ) : (
-                <Box 
-                  component="img" 
-                  src={formatPath(project.image)} 
-                  sx={{ width: '100%', aspectRatio: '16/9', objectFit: 'cover', display: "block" }} 
-                />
-              )}
+              <Box 
+                component="img" 
+                src={project.imageUrl} 
+                onError={(e: any) => {
+                    e.target.src = `https://socialify.git.ci/T-Fluffy/${project.title.toLowerCase().replace(/ /g, '-')}/image?theme=Dark`;
+                }}
+                sx={{ width: '100%', aspectRatio: '16/9', objectFit: 'cover', display: "block" }} 
+              />
             </Box>
           </Grid>
 
           <Grid size={{ xs: 12, md: 5 }}>
             <Typography variant="overline" sx={{ color: cyberBlue, fontWeight: 'bold', letterSpacing: 3 }}>
-              TECHNICAL_SPECIFICATIONS
+              PROJECT_IDENTIFIER: {project.id}
             </Typography>
-            <Typography variant="h2" sx={{ color: "white", fontWeight: "bold", mb: 3, textTransform: 'uppercase' }}>
+            <Typography variant="h2" sx={{ color: "white", fontWeight: "bold", mb: 3, textTransform: 'uppercase', fontSize: { xs: '2.5rem', md: '3.5rem' } }}>
               {project.title}
             </Typography>
 
@@ -125,48 +124,37 @@ const ProjectDetails: React.FC = () => {
                   key={tech} 
                   label={tech} 
                   size="small"
-                  sx={{ color: cyberBlue, border: `1px solid rgba(0, 191, 255, 0.2)`, mb: 1 }} 
+                  sx={{ color: cyberBlue, border: `1px solid rgba(0, 191, 255, 0.2)`, mb: 1, bgcolor: 'transparent' }} 
                 />
               ))}
             </Stack>
 
-            <Button 
-              component="a"
-              variant="contained" 
-              fullWidth
-              startIcon={<GitHubIcon />}
-              href={project.githubLink}
-              target="_blank"
-              sx={{ bgcolor: cyberBlue, color: "black", fontWeight: 'bold' }}
-            >
-              SOURCE_CODE
-            </Button>
-            {project.live && (
-              <Button 
-                component="a"
-                variant="outlined" 
-                fullWidth
-                startIcon={<LaunchIcon />} 
-                href={project.live}
-                target="_blank"
-                sx={{ borderColor: cyberBlue, color: cyberBlue }}
-              >
-                LIVE_DEMO
-              </Button>
-            )}
+            <Stack spacing={2}>
+                <Button 
+                  component="a"
+                  variant="contained" 
+                  startIcon={<GitHubIcon />}
+                  href={project.githubLink}
+                  target="_blank"
+                  sx={{ bgcolor: cyberBlue, color: "black", fontWeight: 'bold', "&:hover": { bgcolor: 'white' } }}
+                >
+                  SOURCE_CODE
+                </Button>
+                {project.live && (
+                  <Button 
+                    component="a"
+                    variant="outlined" 
+                    startIcon={<LaunchIcon />} 
+                    href={project.live}
+                    target="_blank"
+                    sx={{ borderColor: cyberBlue, color: cyberBlue }}
+                  >
+                    LIVE_DEMO
+                  </Button>
+                )}
+            </Stack>
           </Grid>
         </Grid>
-
-        <Box sx={{ mt: 10, pt: 4, borderTop: '1px solid rgba(255,255,255,0.05)', textAlign: 'center' }}>
-          <Button 
-            onClick={() => navigate(`/project/${nextProject.id}`)}
-            endIcon={<ArrowForwardIcon />}
-            sx={{ color: 'white', '&:hover': { color: cyberBlue } }}
-          >
-            NEXT: {nextProject.title}
-          </Button>
-        </Box>
-
       </Container>
     </Fade>
   );

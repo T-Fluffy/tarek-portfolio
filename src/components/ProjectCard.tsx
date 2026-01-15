@@ -1,12 +1,6 @@
-import React from "react";
+import React, { useState } from "react";
 import type { Project } from "../types/Project";
-import {
-  Card,
-  CardContent,
-  Typography,
-  CardActionArea,
-  Box
-} from "@mui/material";
+import { Card, CardContent, Typography, CardActionArea, Box } from "@mui/material";
 
 interface Props {
   project: Project;
@@ -14,55 +8,47 @@ interface Props {
 }
 
 const ProjectCard: React.FC<Props> = ({ project, onClick }) => {
-  const displayImage = project.images?.[0] || project.image;
+  const [imgSrc, setImgSrc] = useState(project.imageUrl);
 
   return (
-    <Card
-      sx={{
-        height: "100%",
-        borderRadius: 3,
-        backgroundColor: "#121212",
-        color: "#fff",
-        display: "flex",
-        flexDirection: "column",
-        border: "1px solid rgba(0, 191, 255, 0.3)",
-        transition: "transform 0.3s, box-shadow 0.3s",
+    <Card 
+      sx={{ 
+        height: "100%", 
+        bgcolor: "#121212", 
+        border: "1px solid #333",
+        position: "relative",
+        zIndex: 10, // Force it to the front
+        transition: "all 0.3s ease-in-out",
         "&:hover": {
-          transform: "translateY(-8px)",
-          boxShadow: "0 0 20px rgba(0, 191, 255, 0.4)", // Glow effect
-          borderColor: "#00bfff",
+          transform: "scale(1.02)",
+          borderColor: "cyan",
+          boxShadow: "0 0 15px cyan",
+          cursor: "pointer"
         }
       }}
     >
-      <CardActionArea onClick={onClick}>
-        <Box
-          sx={{
-            width: "100%",
-            height: 200,
-            overflow: "hidden",
-            borderTopLeftRadius: 12,
-            borderTopRightRadius: 12,
-            display: "flex",
-            alignItems: "center",
-            justifyContent: "center"
-          }}
-        >
+      <CardActionArea 
+        onClick={onClick} 
+        sx={{ height: "100%", "& .MuiCardActionArea-focusHighlight": { bgcolor: "transparent" } }}
+      >
+        <Box sx={{ width: "100%", height: 200, bgcolor: "#1a1a1a", display: "flex", position: "relative" }}>
           <img
-            src={displayImage}
+            src={imgSrc}
             alt={project.title}
-            style={{
-              width: "100%",
-              height: "100%",
-              objectFit: "cover"
+            onError={() => setImgSrc(`https://socialify.git.ci/T-Fluffy/${project.image}/image?theme=Dark`)}
+            style={{ 
+              width: "100%", 
+              height: "100%", 
+              objectFit: "cover",
+              display: "block",
+              position: "relative",
+              zIndex: 2 
             }}
           />
         </Box>
-        <CardContent>
-          <Typography gutterBottom variant="h6">
+        <CardContent sx={{ position: "relative", zIndex: 2 }}>
+          <Typography variant="h6" sx={{ color: "cyan", fontWeight: "bold" }}>
             {project.title}
-          </Typography>
-          <Typography variant="body2" color="gray">
-            {project.description}
           </Typography>
         </CardContent>
       </CardActionArea>
