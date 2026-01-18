@@ -40,10 +40,11 @@ const App: React.FC = () => {
 
       <main style={{ 
         flex: 1, 
-        padding: "1rem",
+        padding: "120px 1rem 100px 1rem",
         animation: "fadeIn 0.8s ease-in",
         position: "relative",
-        zIndex: 2
+        zIndex: 2,
+        minHeight: "calc(100vh - 200px)"
       }}>
         <Routes>
           <Route path="/" element={<Home />} />

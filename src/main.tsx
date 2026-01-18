@@ -1,4 +1,4 @@
-import { BrowserRouter } from 'react-router-dom';
+import { HashRouter } from 'react-router-dom'; // 🚀 Changed from BrowserRouter
 import { createRoot } from 'react-dom/client';
 import './index.css'
 import App from './App.tsx'
@@ -10,10 +10,10 @@ import ErrorBoundary from './components/ErrorBoundary.tsx';
 const root = createRoot(document.getElementById('root') as HTMLElement);
 root.render(
   <React.StrictMode>
-    <BrowserRouter basename="/tarek-portfolio">
+    <HashRouter> 
       <ErrorBoundary>
         <App />
       </ErrorBoundary>
-    </BrowserRouter>
+    </HashRouter>
   </React.StrictMode>
 )
