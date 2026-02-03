@@ -30,16 +30,15 @@ const About: React.FC = () => {
       <Box sx={{ textAlign: "left", mb: 6 }}>
         {/* The Robust Professional Intro */}
         <Typography variant="body1" sx={{ fontSize: "1.15rem", mb: 3, lineHeight: 1.8 }}>
-          Hello, I'm <strong style={{ color: cyberBlue }}>Tarek</strong>, a Software Engineer and Game Developer 
-          with specialized expertise in the <strong style={{ color: cyberBlue }}>Unity Engine</strong>. 
+          Hello, I'm <strong style={{ color: cyberBlue }}>Tarek</strong>, a Junior Software Engineer and Game Developer 
+          with specialized expertise in the use of <strong style={{ color: cyberBlue }}>Unity Engine</strong> and trying to convert my skills to the <strong style={{ color: cyberBlue }}>Godot Engine</strong> along the way. 
           My passion lies at the intersection of game and web technologies, where I bridge the gap between 
-          immersive interactive worlds and robust system architecture.
+          immersive interactive worlds and robust system architecture while delivering enjoyable gameplay experiences.
         </Typography>
-
         <Typography variant="body1" sx={{ fontSize: "1.15rem", mb: 3, lineHeight: 1.8 }}>
           I architect full-stack solutions utilizing <strong style={{ color: cyberBlue }}>Angular or React</strong> for 
-          the frontend, powered by scalable backends built with <strong style={{ color: cyberBlue }}>Dotnet, Spring Boot and Nestjs</strong>. 
-          Adaptable and self-reliant, I am committed to continuous technical evolution to stay at the forefront of the IT landscape.
+          the frontend, powered by scalable backends built with <strong style={{ color: cyberBlue }}>Dotnet, Spring Boot or Nestjs</strong> and playing with some 3D libraries like <strong style={{ color: cyberBlue }}>Three js</strong> sometimes. 
+          Adaptable and self-reliant. I am committed to continuing my technical evolution, staying at the forefront of the IT landscape and staying alive in this ever-changing industry deeply focused on the use of <strong style={{ color: cyberBlue }}>LLM AI models</strong>.
         </Typography>
       </Box>
 
