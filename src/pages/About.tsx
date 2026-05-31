@@ -23,7 +23,7 @@ const About: React.FC = () => {
         zIndex: 1,
       }}
     >
-      <Typography variant="h3" component="h1" gutterBottom fontWeight="bold" sx={{ color: cyberBlue, mb: 4 }}>
+      <Typography variant="h3" component="h1" gutterBottom fontWeight="bold" sx={{ color: cyberBlue, mb: 4 ,fontSize: { xs: "2.50rem", md: "3.25rem" }}}>
         &lt; About Me /&gt;
       </Typography>
 

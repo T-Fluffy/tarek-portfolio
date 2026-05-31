@@ -42,13 +42,14 @@ const Projects: React.FC = () => {
   }, []);
 
   return (
-    <Container sx={{ py: 10 }}>
-      <Typography variant="h3" align="center" color="cyan" gutterBottom sx={{ fontWeight: 'bold', fontFamily: 'monospace' }}>
+    <Container>
+      <Typography variant="h3" align="center" color="cyan" gutterBottom 
+        sx={{ fontWeight: 'bold', fontFamily: 'monospace',fontSize: { xs: "1.70rem", md: "3.25rem" } }}>
         PORTFOLIO_PROJECTS
       </Typography>
       
       {loading ? (
-        <Box sx={{ display: 'flex', justifyContent: 'center', py: 10 }}>
+        <Box sx={{ display: 'flex', justifyContent: 'center', py: 5 }}>
           <CircularProgress color="inherit" sx={{ color: 'cyan' }} />
         </Box>
       ) : (

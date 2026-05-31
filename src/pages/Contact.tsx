@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { ToastContainer, toast } from 'react-toastify';
+import { toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 
 import { 
@@ -74,8 +74,7 @@ const Contact: React.FC = () => {
   };
 
   return (
-    <Container maxWidth="lg" sx={{ position: "relative", zIndex: 10 }}>
-      <ToastContainer />
+    <Container maxWidth="md" sx={{ py: 8, px: 0,textAlign: "center" }} >
 
       <Box sx={{ mb: 6 }}>
         <Typography variant="h3" sx={{ color: "white", fontWeight: "bold" }}>
@@ -83,8 +82,8 @@ const Contact: React.FC = () => {
         </Typography>
       </Box>
 
-      <Grid container spacing={5}>
-        <Grid size={{ xs: 12, md: 7 }}>
+      <Grid container spacing={3} justifyContent="center" alignItems="center">
+        <Grid size={{ xs: 12, md: 12 }}>
           {/* Main Form Box */}
           <Box sx={{ 
             p: 4, 
@@ -96,7 +95,7 @@ const Contact: React.FC = () => {
             overflow: "hidden",
             minHeight: "450px",
             display: "flex",
-            flexDirection: "column"
+            flexDirection: "column",
           }}>
             
             {/* 🚀 THE CENTER OVERLAY FIX */}
@@ -114,7 +113,7 @@ const Contact: React.FC = () => {
                 textAlign: "center",
                 p: 3
               }}>
-                <Box sx={{ 
+                <Box sx={{
                   mb: 2, p: 2, 
                   border: `1px solid #4caf50`, 
                   borderRadius: "50%",
