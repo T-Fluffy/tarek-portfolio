@@ -69,10 +69,10 @@ const Navbar: React.FC = () => {
             <IconButton onClick={handleMenuOpen} color="inherit"><MenuIcon /></IconButton>
             <Menu anchorEl={anchorEl} open={Boolean(anchorEl)} onClose={() => handleMenuClose()} 
               PaperProps={{ sx: { bgcolor: "#0a0a0f", color: "white", border: `1px solid ${cyberBlue}` } }}>
-              {/* On garde Home dans le menu mobile car c'est plus ergonomique sur téléphone */}
               <MenuItem onClick={() => handleMenuClose("/")}>Home</MenuItem>
               <MenuItem onClick={() => handleMenuClose("/about")}>About</MenuItem>
               <MenuItem onClick={() => handleMenuClose("/projects")}>Portfolio</MenuItem>
+              <MenuItem onClick={() => handleMenuClose("/BooksPage")}>Books</MenuItem>
               <MenuItem onClick={() => handleMenuClose("/contact")}>Contact</MenuItem>
             </Menu>
           </>
@@ -81,6 +81,7 @@ const Navbar: React.FC = () => {
             {/* Bouton Home SUPPRIMÉ ici */}
             <Button component={NavLink} to="/about" sx={navItemStyles}>About</Button>
             <Button component={NavLink} to="/projects" sx={navItemStyles}>Portfolio</Button>
+            <Button component={NavLink} to="/BooksPage" sx={navItemStyles}>Books</Button>
             <Button component={NavLink} to="/contact" sx={navItemStyles}>Contact</Button>
           </Box>
         )}

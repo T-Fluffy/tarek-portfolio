@@ -12,6 +12,7 @@ import CanvasBackground from "./components/UI/CanvasBackground";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 import ProjectDetails from "./pages/ProjectDetails";
+import BooksPage from "./pages/BooksPage";
 
 const ScrollToTop = () => {
   const { pathname } = useLocation();
@@ -51,12 +52,12 @@ const App: React.FC = () => {
           <Route path="/about" element={<About />} />
           <Route path="/projects" element={<Projects />} />
           <Route path="/project/:projectId" element={<ProjectDetails />} />
+          <Route path="/BooksPage" element={<BooksPage />} />
           <Route path="/contact" element={<Contact />} />
           <Route path="*" element={<NotFound />} />
         </Routes>
       </main>
 
-      {/* The new Footer component replaces the old inline div */}
       <Footer />
 
       <style>
