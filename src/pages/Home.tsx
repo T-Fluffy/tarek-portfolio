@@ -1,7 +1,7 @@
 import React from "react";
 import { Container, Typography, Box, Chip, Grid } from "@mui/material"; 
 import Typewriter from 'typewriter-effect'; // Import the typewriter
-import MyPicture from "../assets/Images/Myface.png";
+import MyPicture from "../assets/images/Myface.png";
 import GitHubIcon from '@mui/icons-material/GitHub';
 import LinkedInIcon from '@mui/icons-material/LinkedIn';
 import EmailIcon from '@mui/icons-material/Email';

@@ -8,8 +8,8 @@ import LanguageIcon from '@mui/icons-material/Language';
 const About: React.FC = () => {
   const cyberBlue = "#00BFFF";
 
-  const Resume_English = "/assets/TarekHalloulEN.pdf";
-  const Resume_French = "/assets/TarekHalloulFR.pdf";
+  const Resume_English = "./assets/TarekHalloulEN.pdf";
+  const Resume_French = "./assets/TarekHalloulFR.pdf";
 
   return (
     <Container
@@ -106,7 +106,6 @@ const About: React.FC = () => {
                   variant="outlined"
                   href={Resume_English}
                   download="Tarek_Halloul_Resume_EN.pdf"
-                  target="_blank"
                   rel="noopener noreferrer"
                   startIcon={<LanguageIcon />}
                   sx={{ color: "white", borderColor: "rgba(255,255,255,0.2)", "&:hover": { borderColor: cyberBlue } }}
@@ -118,7 +117,6 @@ const About: React.FC = () => {
                   variant="contained"
                   href={Resume_French}
                   download="Tarek_Halloul_Resume_FR.pdf"
-                  target="_blank"
                   rel="noopener noreferrer"
                   startIcon={<DownloadIcon />}
                   sx={{ backgroundColor: cyberBlue, color: "black", "&:hover": { backgroundColor: "white" } }}

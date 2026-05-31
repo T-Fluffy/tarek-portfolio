@@ -8,7 +8,6 @@ Thumbs.db
 node_modules/
 dist/
 dist-ssr/
-.env
 .env.local
 .eslintcache
 .vitest-root/ # Vitest cache
