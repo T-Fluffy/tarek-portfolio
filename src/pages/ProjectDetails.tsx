@@ -129,8 +129,8 @@ const ProjectDetails: React.FC = () => {
               <Box 
                 component="img" 
                 src={project.imageUrl} 
-                onError={(e: any) => { 
-                  e.target.src = `https://socialify.git.ci/T-Fluffy/${project.image}/image?theme=Dark&pattern=Circuit%20Board`; 
+                onError={(e: React.SyntheticEvent<HTMLImageElement>) => { 
+                  e.currentTarget.src = `https://socialify.git.ci/T-Fluffy/${project.image}/image?theme=Dark&pattern=Circuit%20Board`; 
                 }}
                 sx={{ width: '100%', aspectRatio: '16/9', objectFit: 'cover', display: "block" }} 
               />

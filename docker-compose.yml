@@ -1,0 +1,26 @@
+services:
+  frontend:
+    build:
+      context: .
+      args:
+        # Same-origin: the browser calls /api/... and nginx proxies it to BACKEND_URL.
+        VITE_API_URL: ""
+        VITE_BASE_PATH: /
+        VITE_APP_TITLE: ${VITE_APP_TITLE:-TFluffy's Portfolio}
+    image: tarek-portfolio:latest
+    container_name: tarek-portfolio
+    ports:
+      - "8080:8080"
+    environment:
+      # URL of the hosted backend (Render). Set in your .env file.
+      BACKEND_URL: ${BACKEND_URL:?Set BACKEND_URL in .env}
+    restart: unless-stopped
+    healthcheck:
+      test: ["CMD", "wget", "-qO-", "http://127.0.0.1:8080/healthz"]
+      interval: 30s
+      timeout: 5s
+      retries: 3
+      start_period: 10s
+    read_only: true
+    tmpfs:
+      - /tmp

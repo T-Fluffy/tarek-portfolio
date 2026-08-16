@@ -1,0 +1,59 @@
+name: CI
+
+on:
+  push:
+    branches: [master]
+  pull_request:
+
+jobs:
+  build:
+    name: Lint, Test & Build
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+
+      # Install pinned versions from the committed lockfile, lifecycle scripts blocked.
+      - name: Install dependencies
+        run: npm ci --ignore-scripts --no-fund
+
+      - name: Audit dependencies
+        run: npm audit --audit-level=high
+
+      - name: Lint
+        run: npm run lint
+
+      - name: Test
+        run: npm run test:run
+
+      - name: Build
+        run: npm run build
+        env:
+          VITE_API_URL: ""
+          VITE_BASE_PATH: /tarek-portfolio/
+
+      - name: Scan lockfile for known vulnerabilities
+        uses: google/osv-scanner-action@v1
+        with:
+          args: scan package-lock.json
+
+  docker:
+    name: Docker image build + Trivy scan
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Build image
+        run: docker build --build-arg VITE_API_URL="" --build-arg VITE_BASE_PATH=/ -t tarek-portfolio:ci .
+
+      - name: Scan image for CVEs
+        uses: aquasecurity/trivy-action@0.28.0
+        with:
+          image-ref: tarek-portfolio:ci
+          severity: HIGH,CRITICAL
+          exit-code: "1"
+          ignore-unfixed: true

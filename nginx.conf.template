@@ -1,0 +1,86 @@
+user nginx;
+worker_processes auto;
+pid /tmp/nginx.pid;
+error_log /tmp/nginx_error.log warn;
+
+events {
+    worker_connections 1024;
+}
+
+http {
+    include /etc/nginx/mime.types;
+    default_type application/octet-stream;
+
+    sendfile on;
+    keepalive_timeout 65;
+    server_tokens off;
+
+    # Writable temp paths for the unprivileged user
+    client_body_temp_path /tmp;
+    proxy_temp_path /tmp;
+    fastcgi_temp_path /tmp;
+    uwsgi_temp_path /tmp;
+    scgi_temp_path /tmp;
+
+    log_format main '$remote_addr - $remote_user [$time_local] "$request" '
+                    '$status $body_bytes_sent "$http_referer" '
+                    '"$http_user_agent"';
+    access_log /tmp/nginx_access.log main;
+
+    server {
+        listen 8080;
+        server_name _;
+
+        root /usr/share/nginx/html;
+        index index.html;
+
+        include /etc/nginx/security-headers.conf;
+
+        # Compression for text assets
+        gzip on;
+        gzip_vary on;
+        gzip_types text/plain text/css application/javascript application/json image/svg+xml;
+
+        # Never serve dotfiles / VCS internals
+        location ~ /\. {
+            deny all;
+        }
+
+        # Hashed build assets: cache aggressively
+        location /assets/ {
+            include /etc/nginx/security-headers.conf;
+            expires 1y;
+            add_header Cache-Control "public, immutable" always;
+            try_files $uri =404;
+        }
+
+        # SPA entry: never cache so updates propagate
+        location = /index.html {
+            include /etc/nginx/security-headers.conf;
+            add_header Cache-Control "no-cache, no-store, must-revalidate" always;
+        }
+
+        # Proxy contact/API requests to the hosted backend (Render).
+        # BACKEND_URL is substituted at container start by envsubst.
+        location /api/ {
+            proxy_pass ${BACKEND_URL};
+            proxy_http_version 1.1;
+            proxy_set_header Host $host;
+            proxy_set_header X-Real-IP $remote_addr;
+            proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
+            proxy_set_header X-Forwarded-Proto $scheme;
+        }
+
+        # HashRouter SPA fallback
+        location / {
+            try_files $uri $uri/ /index.html;
+        }
+
+        # Lightweight health check for Docker HEALTHCHECK
+        location = /healthz {
+            access_log off;
+            default_type text/plain;
+            return 200 "ok";
+        }
+    }
+}

@@ -8,6 +8,7 @@ export interface GithubRepo {
   stargazers_count: number;
   language: string;
   topics: string[];
+  fork: boolean;
 }
 
 export const useGithubProjects = (username: string) => {
@@ -19,7 +20,7 @@ export const useGithubProjects = (username: string) => {
       .then(res => res.json())
       .then(data => {
         // Filter out forks if you want only the original games/tools
-        const originalRepos = data.filter((repo: any) => !repo.fork);
+        const originalRepos = (data as GithubRepo[]).filter(repo => !repo.fork);
         setProjects(originalRepos);
         setLoading(false);
       })

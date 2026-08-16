@@ -66,7 +66,7 @@ const Contact: React.FC = () => {
         // Return to IDLE after 6 seconds
         setTimeout(() => setStatus("IDLE"), 6000); 
       } else { throw new Error(); }
-    } catch (error) {
+    } catch {
       setStatus("ERROR");
       toast.error("> ERROR: Signal Lost");
       setTimeout(() => setStatus("IDLE"), 4000);
@@ -137,6 +137,22 @@ const Contact: React.FC = () => {
             </Fade>
 
             <form onSubmit={handleSubmit} style={{ visibility: status === "SUCCESS" ? "hidden" : "visible" }}>
+              {/* Honeypot anti-spam: hidden from humans, bots often fill it */}
+              <input
+                type="text"
+                name="Honeypot"
+                tabIndex={-1}
+                autoComplete="off"
+                aria-hidden="true"
+                style={{
+                  position: "absolute",
+                  left: "-9999px",
+                  width: "1px",
+                  height: "1px",
+                  opacity: 0,
+                  overflow: "hidden",
+                }}
+              />
               <TextField fullWidth name="name" label="// NAME" variant="outlined" sx={fieldStyles} required />
               <TextField fullWidth name="email" type="email" label="// EMAIL" variant="outlined" sx={fieldStyles} required />
               <TextField fullWidth name="subject" label="// SUBJECT" variant="outlined" sx={fieldStyles} required />

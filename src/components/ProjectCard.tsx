@@ -46,8 +46,8 @@ const ProjectCard: React.FC<ProjectCardProps> = ({ project, onClick }) => {
           component="img"
           image={project.imageUrl}
           alt={project.title}
-          onError={(e: any) => { 
-            e.target.src = `https://socialify.git.ci/T-Fluffy/${project.image}/image?theme=Dark&pattern=Circuit%20Board`; 
+          onError={(e: React.SyntheticEvent<HTMLImageElement>) => { 
+            e.currentTarget.src = `https://socialify.git.ci/T-Fluffy/${project.image}/image?theme=Dark&pattern=Circuit%20Board`; 
           }}
           sx={{ transition: "transform 0.5s ease" }}
         />

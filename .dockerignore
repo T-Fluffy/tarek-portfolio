@@ -1,0 +1,14 @@
+node_modules
+dist
+dist-ssr
+.git
+.github
+*.log
+.DS_Store
+Thumbs.db
+.vscode
+.idea
+.env
+.env.*
+!.env.example
+Backend

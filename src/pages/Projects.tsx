@@ -13,11 +13,21 @@ const Projects: React.FC = () => {
     const fetchGithubRepos = async () => {
       try {
         const response = await fetch("https://api.github.com/users/T-Fluffy/repos?sort=updated&per_page=50");
-        const data = await response.json();
+        const data = await response.json() as Array<{
+          id: number;
+          name: string;
+          description: string | null;
+          default_branch?: string;
+          language: string | null;
+          topics?: string[];
+          html_url: string;
+          homepage: string | null;
+          fork: boolean;
+        }>;
 
         const mappedProjects: Project[] = data
-          .filter((repo: any) => !repo.fork && repo.name.toLowerCase() !== "t-fluffy")
-          .map((repo: any) => {
+          .filter(repo => !repo.fork && repo.name.toLowerCase() !== "t-fluffy")
+          .map(repo => {
             const branch = repo.default_branch || "main";
             return {
               id: repo.id.toString(),
