@@ -41,6 +41,9 @@ COPY security-headers.conf /etc/nginx/security-headers.conf
 # Run nginx as the unprivileged 'nginx' user
 USER nginx
 
+# Default backend so the container works out of the box; override with -e at runtime.
+ENV BACKEND_URL=https://tarek-portfolio-backend.onrender.com
+
 EXPOSE 8080
 
 # Substitute the Render backend URL, then start nginx with the generated config.
