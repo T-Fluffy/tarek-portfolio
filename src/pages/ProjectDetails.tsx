@@ -17,6 +17,7 @@ import GitHubIcon from "@mui/icons-material/GitHub";
 import LaunchIcon from "@mui/icons-material/Launch";
 
 import type { Project } from "../types/Project";
+import ReadmeSection from "../components/ReadmeSection";
 
 const ProjectDetails: React.FC = () => {
   const { projectId } = useParams<{ projectId: string }>();
@@ -47,7 +48,9 @@ const ProjectDetails: React.FC = () => {
           technologies: Array.from(new Set([...allLanguages, ...(repo.topics || [])])),
           githubLink: repo.html_url,
           live: repo.homepage || "",
-          image: repo.name
+          image: repo.name,
+          owner: repo.owner.login,
+          branch
         };
 
         setProject(mappedProject);
@@ -217,6 +220,12 @@ const ProjectDetails: React.FC = () => {
             </Stack>
           </Grid>
         </Grid>
+
+        <ReadmeSection
+          owner={project.owner || "T-Fluffy"}
+          repo={project.image}
+          branch={project.branch || "main"}
+        />
       </Container>
     </Fade>
   );

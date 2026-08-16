@@ -7,4 +7,6 @@ export interface Project {
   githubLink: string;
   live: string;
   image: string; // The raw repo name
+  owner?: string;
+  branch?: string;
 }

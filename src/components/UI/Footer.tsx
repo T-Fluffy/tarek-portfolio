@@ -4,9 +4,11 @@ import GitHubIcon from "@mui/icons-material/GitHub";
 import LinkedInIcon from "@mui/icons-material/LinkedIn";
 import TerminalIcon from '@mui/icons-material/Terminal';
 import KeyboardArrowUpIcon from "@mui/icons-material/KeyboardArrowUp";
+import TerminalModal from "./TerminalModal";
 
 const Footer: React.FC = () => {
   const cyberBlue = "#00BFFF";
+  const [termOpen, setTermOpen] = useState(false);
   const [displayText, setDisplayText] = useState("");
   const fullText = "STATUS: ENCRYPTED_CONNECTION // V.2.0.26";
 
@@ -77,7 +79,6 @@ const Footer: React.FC = () => {
             {[
               { icon: <GitHubIcon />, link: "https://github.com/T-Fluffy", label: "Source_Code" },
               { icon: <LinkedInIcon />, link: "https://www.linkedin.com/in/tarekhalloul/", label: "Neural_Network" },
-              { icon: <TerminalIcon />, link: "/projects", label: "Project_Logs" },
             ].map((social, index) => (
               <Tooltip key={index} title={social.label} arrow>
                 <IconButton
@@ -100,6 +101,26 @@ const Footer: React.FC = () => {
                 </IconButton>
               </Tooltip>
             ))}
+            <Tooltip title="Terminal" arrow>
+              <IconButton
+                onClick={() => setTermOpen(true)}
+                aria-label="open terminal"
+                sx={{
+                  color: "rgba(255,255,255,0.5)",
+                  border: "1px solid rgba(255,255,255,0.05)",
+                  transition: "0.4s",
+                  "&:hover": {
+                    color: cyberBlue,
+                    borderColor: cyberBlue,
+                    boxShadow: `0 0 20px ${cyberBlue}44`,
+                    transform: "translateY(-5px) scale(1.1)",
+                    bgcolor: "rgba(0, 191, 255, 0.05)"
+                  }
+                }}
+              >
+                <TerminalIcon />
+              </IconButton>
+            </Tooltip>
           </Stack>
 
           {/* Right Side: Back to Top with Glitch Effect */}
@@ -125,6 +146,8 @@ const Footer: React.FC = () => {
           </Box>
         </Stack>
       </Container>
+
+      <TerminalModal open={termOpen} onClose={() => setTermOpen(false)} />
 
       {/* Modern Animations */}
       <style>
