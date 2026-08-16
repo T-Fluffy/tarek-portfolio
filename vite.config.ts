@@ -12,7 +12,7 @@ function cspMeta(): Plugin {
   const cspValue =
     "default-src 'self'; script-src 'self'; style-src 'self' 'unsafe-inline'; " +
     "img-src 'self' data: https://github.com https://raw.githubusercontent.com " +
-    "https://avatars.githubusercontent.com https://socialify.git.ci; " +
+    "https://avatars.githubusercontent.com https://media.githubusercontent.com https://socialify.git.ci; " +
     `connect-src 'self' ${apiUrl} https://api.github.com; ` +
     "font-src 'self' data:; base-uri 'self'; form-action 'self'; frame-ancestors 'none'";
 

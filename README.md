@@ -58,7 +58,7 @@ Pushing to `master` triggers `.github/workflows/deploy.yml`, which:
 - **CI scanning**: `osv-scanner` on the lockfile and **Trivy** CVE scan on the Docker image.
 - **Dependabot**: automated security-update PRs for npm + GitHub Actions.
 - **CSP**: a Content-Security-Policy (meta tag + nginx header) allows only the required
-  GitHub / socialify image hosts and blocks inline scripts.
+  GitHub / LFS media / socialify image hosts and blocks inline scripts.
 - **nginx**: `server_tokens off`, dotfile access denied, immutable hashing for assets,
   HSTS/clickjacking/sniffing headers, non-root user.
 - **Backend** (in `tarek-portfolio-backend`): input validation, honeypot anti-spam,
