@@ -25,8 +25,12 @@ RUN npm run build
 ########################
 # Runtime stage (non-root nginx)
 ########################
-FROM nginx:1.27-alpine AS runtime
+FROM nginx:1.30.4-alpine3.24 AS runtime
 WORKDIR /app
+
+# Patch all base-image packages to the latest available (fixes known CVEs)
+# in openssl, musl, zlib, libxml2, etc. at build time.
+RUN apk upgrade --no-cache
 
 # Static build output
 COPY --from=build /app/dist /usr/share/nginx/html

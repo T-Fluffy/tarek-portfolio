@@ -39,4 +39,7 @@ jobs:
           VITE_BASE_PATH: /tarek-portfolio/
 
       - name: Publish to gh-pages branch
-        run: npx --no-install gh-pages -d dist
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          npx --no-install gh-pages -d dist -r "https://x-access-token:${{ github.token }}@github.com/${{ github.repository }}.git"

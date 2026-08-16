@@ -37,9 +37,12 @@ jobs:
           VITE_BASE_PATH: /tarek-portfolio/
 
       - name: Scan lockfile for known vulnerabilities
-        uses: google/osv-scanner-action@v1
+        uses: google/osv-scanner-action/osv-scanner-action@v2.5.0
         with:
-          args: scan package-lock.json
+          scan-args: |-
+            --format=sarif
+            --output=osv-scanner.sarif
+            .
 
   docker:
     name: Docker image build + Trivy scan
@@ -51,7 +54,7 @@ jobs:
         run: docker build --build-arg VITE_API_URL="" --build-arg VITE_BASE_PATH=/ -t tarek-portfolio:ci .
 
       - name: Scan image for CVEs
-        uses: aquasecurity/trivy-action@0.28.0
+        uses: aquasecurity/trivy-action@v0.36.0
         with:
           image-ref: tarek-portfolio:ci
           severity: HIGH,CRITICAL
