@@ -95,8 +95,8 @@ const TerminalModal: React.FC<TerminalModalProps> = ({ open, onClose }) => {
       case "cv":
         {
           const lang = arg === "fr" ? "FR" : "EN";
-          out.push(`> OPENING_RESUME_${lang}.PDF...`);
-          window.open(`${import.meta.env.BASE_URL}assets/TarekHalloul${lang}.pdf`, "_blank");
+          out.push(`> OPENING_RESUME_WEB_${lang}.PDF...`);
+          window.open(`${import.meta.env.BASE_URL}assets/CV_TarekHalloul_Web${lang === "FR" ? "_FR" : ""}.pdf`, "_blank");
         }
         break;
       case "email":
@@ -115,17 +115,30 @@ const TerminalModal: React.FC<TerminalModalProps> = ({ open, onClose }) => {
         out.push("TAREK_HALLOUL // FULL-STACK_DEVELOPER");
         break;
       case "ls":
-        out.push("about/   projects/   contact/   home/", "resume.pdf   resume-fr.pdf");
+        out.push(
+          "about/   projects/   contact/   home/",
+          "cv-web.pdf           cv-web-fr.pdf",
+          "cv-gameplay.pdf      cv-gameplay-fr.pdf",
+        );
         break;
       case "cat":
-        if (arg === "resume.pdf" || arg === "resume") {
-          out.push("> OPENING_RESUME_EN.PDF...");
-          window.open(`${import.meta.env.BASE_URL}assets/TarekHalloulEN.pdf`, "_blank");
-        } else if (arg === "resume-fr.pdf" || arg === "resume fr") {
-          out.push("> OPENING_RESUME_FR.PDF...");
-          window.open(`${import.meta.env.BASE_URL}assets/TarekHalloulFR.pdf`, "_blank");
-        } else {
-          out.push(`cat: '${arg || "<file>"}': NO_SUCH_FILE`);
+        {
+          const file = arg.toLowerCase();
+          if (file === "cv-web.pdf" || file === "resume" || file === "resume.pdf") {
+            out.push("> OPENING_CV_WEB_EN.PDF...");
+            window.open(`${import.meta.env.BASE_URL}assets/CV_TarekHalloul_Web.pdf`, "_blank");
+          } else if (file === "cv-web-fr.pdf" || file === "resume fr" || file === "resume-fr.pdf") {
+            out.push("> OPENING_CV_WEB_FR.PDF...");
+            window.open(`${import.meta.env.BASE_URL}assets/CV_TarekHalloul_Web_FR.pdf`, "_blank");
+          } else if (file === "cv-gameplay.pdf") {
+            out.push("> OPENING_CV_GAMEPLAY_EN.PDF...");
+            window.open(`${import.meta.env.BASE_URL}assets/CV_TarekHalloul_Gameplay.pdf`, "_blank");
+          } else if (file === "cv-gameplay-fr.pdf") {
+            out.push("> OPENING_CV_GAMEPLAY_FR.PDF...");
+            window.open(`${import.meta.env.BASE_URL}assets/CV_TarekHalloul_Gameplay_FR.pdf`, "_blank");
+          } else {
+            out.push(`cat: '${arg || "<file>"}': NO_SUCH_FILE`);
+          }
         }
         break;
       case "date":

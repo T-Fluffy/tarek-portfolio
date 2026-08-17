@@ -1,15 +1,19 @@
 import React from "react";
-import { Container, Typography, Box, Card, CardContent, Button, Paper, Stack } from "@mui/material";
-import DownloadIcon from "@mui/icons-material/Download";
+import { Container, Typography, Box, Card, CardContent, Button, Paper, Stack, Divider } from "@mui/material";
 import TerminalIcon from '@mui/icons-material/Terminal';
-import LanguageIcon from '@mui/icons-material/Language';
-//import CodeIcon from '@mui/icons-material/Code';
+import PublicIcon from '@mui/icons-material/Public';
+import VideogameAssetIcon from '@mui/icons-material/VideogameAsset';
 
 const About: React.FC = () => {
   const cyberBlue = "#00BFFF";
+  const base = import.meta.env.BASE_URL;
 
-  const Resume_English = "./assets/TarekHalloulEN.pdf";
-  const Resume_French = "./assets/TarekHalloulFR.pdf";
+  const CVs = {
+    webEn: `${base}assets/CV_TarekHalloul_Web.pdf`,
+    gameEn: `${base}assets/CV_TarekHalloul_Gameplay.pdf`,
+    webFr: `${base}assets/CV_TarekHalloul_Web_FR.pdf`,
+    gameFr: `${base}assets/CV_TarekHalloul_Gameplay_FR.pdf`,
+  };
 
   return (
     <Container
@@ -97,32 +101,72 @@ const About: React.FC = () => {
           }}
         >
           <CardContent sx={{ p: 4 }}>
-            <Typography variant="h6" sx={{ fontWeight: 'bold', mb: 2 }}>
+            <Typography variant="h6" sx={{ fontWeight: 'bold', mb: 3 }}>
               Ready for the full documentation?
             </Typography>
-            
-            <Stack direction={{ xs: 'column', sm: 'row' }} spacing={2} justifyContent="center">
-                <Button
-                  variant="outlined"
-                  href={Resume_English}
-                  download="Tarek_Halloul_Resume_EN.pdf"
-                  rel="noopener noreferrer"
-                  startIcon={<LanguageIcon />}
-                  sx={{ color: "white", borderColor: "rgba(255,255,255,0.2)", "&:hover": { borderColor: cyberBlue } }}
-                >
-                  English CV
-                </Button>
 
-                <Button
-                  variant="contained"
-                  href={Resume_French}
-                  download="Tarek_Halloul_Resume_FR.pdf"
-                  rel="noopener noreferrer"
-                  startIcon={<DownloadIcon />}
-                  sx={{ backgroundColor: cyberBlue, color: "black", "&:hover": { backgroundColor: "white" } }}
-                >
-                  CV Français
-                </Button>
+            <Stack spacing={3}>
+              <Box>
+                <Typography variant="subtitle2" sx={{ color: cyberBlue, fontFamily: "monospace", fontWeight: 'bold', letterSpacing: 1, mb: 1.5 }}>
+                  &gt; ENGLISH_CV
+                </Typography>
+                <Stack direction={{ xs: 'column', sm: 'row' }} spacing={2}>
+                  <Button
+                    variant="outlined"
+                    fullWidth
+                    href={CVs.webEn}
+                    download="Tarek_Halloul_CV_Web_EN.pdf"
+                    rel="noopener noreferrer"
+                    startIcon={<PublicIcon />}
+                    sx={{ color: "white", borderColor: "rgba(255,255,255,0.2)", "&:hover": { borderColor: cyberBlue } }}
+                  >
+                    WEB
+                  </Button>
+                  <Button
+                    variant="outlined"
+                    fullWidth
+                    href={CVs.gameEn}
+                    download="Tarek_Halloul_CV_Gameplay_EN.pdf"
+                    rel="noopener noreferrer"
+                    startIcon={<VideogameAssetIcon />}
+                    sx={{ color: "white", borderColor: "rgba(255,255,255,0.2)", "&:hover": { borderColor: cyberBlue } }}
+                  >
+                    GAMEDEV
+                  </Button>
+                </Stack>
+              </Box>
+
+              <Divider sx={{ borderColor: "rgba(0, 191, 255, 0.2)" }} />
+
+              <Box>
+                <Typography variant="subtitle2" sx={{ color: cyberBlue, fontFamily: "monospace", fontWeight: 'bold', letterSpacing: 1, mb: 1.5 }}>
+                  &gt; FRENCH_CV
+                </Typography>
+                <Stack direction={{ xs: 'column', sm: 'row' }} spacing={2}>
+                  <Button
+                    variant="outlined"
+                    fullWidth
+                    href={CVs.webFr}
+                    download="Tarek_Halloul_CV_Web_FR.pdf"
+                    rel="noopener noreferrer"
+                    startIcon={<PublicIcon />}
+                    sx={{ color: "white", borderColor: "rgba(255,255,255,0.2)", "&:hover": { borderColor: cyberBlue } }}
+                  >
+                    WEB
+                  </Button>
+                  <Button
+                    variant="contained"
+                    fullWidth
+                    href={CVs.gameFr}
+                    download="Tarek_Halloul_CV_Gameplay_FR.pdf"
+                    rel="noopener noreferrer"
+                    startIcon={<VideogameAssetIcon />}
+                    sx={{ backgroundColor: cyberBlue, color: "black", "&:hover": { backgroundColor: "white" } }}
+                  >
+                    GAMEDEV
+                  </Button>
+                </Stack>
+              </Box>
             </Stack>
           </CardContent>
         </Card>
