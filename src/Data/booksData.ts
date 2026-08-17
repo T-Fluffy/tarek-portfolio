@@ -9,6 +9,8 @@ import gameProgrammingPatternsCover from "../assets/images/game-programming-patt
 import learningGdscriptGodot4Cover from "../assets/images/learning-gdscript-godot4.jpg";
 import effectiveTypescriptCover from "../assets/images/effective-typescript.jpg";
 import pixelLogicCover from "../assets/images/pixel-logic.png";
+import cleanArchitectureCover from "../assets/images/clean-architecture.jpg";
+import aspNetCoreInActionCover from "../assets/images/aspnet-core-in-action.jpg";
 
 export const booksData: BookData[] = [
   {
@@ -173,6 +175,39 @@ export const booksData: BookData[] = [
       "Updated for TypeScript 5 with 50% more content than the first edition",
       "Two new chapters: type-level programming and TypeScript recipes",
       "Concrete examples drawn from real production codebases",
+    ],
+  },
+  {
+    id: "11",
+    title: "Clean Architecture: A Craftsman's Guide to Software Structure and Design",
+    author: "Robert C. Martin",
+    category: "Architecture",
+    status: "Reading",
+    rating: 4,
+    description: "Uncle Bob's pragmatic blueprint for software structure and design: keep the business rules of your application at the centre, independent of frameworks, UI and databases.",
+    image: cleanArchitectureCover,
+    highlights: [
+      "Uncle Bob's pragmatic blueprint for software structure and design",
+      "Keeps business rules independent of frameworks, UI and databases",
+      "Explains layers, boundaries, the dependency rule and hexagonal thinking",
+      "Real-world guidance for managing dependencies and growing clean systems",
+    ],
+  },
+  {
+    id: "12",
+    title: "ASP.NET Core in Action (3rd ed)",
+    author: "Andrew Lock",
+    category: "Web Development",
+    status: "Read",
+    rating: 4,
+    description: "Andrew Lock's comprehensive, 984-page guide to building production-grade web applications with ASP.NET Core, covering minimal APIs, Razor Pages, EF Core, authentication and deployment.",
+    image: aspNetCoreInActionCover,
+    highlights: [
+      "Comprehensive 984-page guide to ASP.NET Core",
+      "Covers minimal APIs, Razor Pages, MVC and Web API controllers",
+      "Data access with Entity Framework Core and dependency injection",
+      "Authentication, authorization, logging, testing and deployment",
+      "Followed through MEAP early-access (V13) to the final print edition",
     ],
   },
 ];
