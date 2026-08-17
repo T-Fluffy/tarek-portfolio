@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import { 
   Box, 
   Container, 
@@ -13,12 +13,16 @@ import BookIcon from "@mui/icons-material/Book";
 import StarIcon from "@mui/icons-material/Star";
 import TerminalIcon from '@mui/icons-material/Terminal';
 import { booksData } from "../Data/booksData";
+import BookMetadataModal from "../components/UI/BookMetadataModal";
+import type { BookData } from "../types/BookData";
 
 const BooksPage: React.FC = () => {
   const cyberBlue = "#00BFFF";
+  const [selectedBook, setSelectedBook] = useState<BookData | null>(null);
 
   return (
-    <Container maxWidth="lg" sx={{ py: 8}}>
+    <>
+      <Container maxWidth="lg" sx={{ py: 8}}>
       
       {/* --- HEADER SECTION --- */}
       <Box 
@@ -72,6 +76,30 @@ const BooksPage: React.FC = () => {
               <Box sx={{ position: 'absolute', top: -5, left: -5, width: 30, height: 30, bgcolor: cyberBlue, opacity: 0.1 }} />
 
               <Stack spacing={2}>
+                {/* Book Cover */}
+                {book.image && (
+                  <Box sx={{ display: "flex", justifyContent: "center" }}>
+                    <Box
+                      component="img"
+                      src={book.image}
+                      alt={`${book.title} cover`}
+                      sx={{
+                        width: "100%",
+                        maxWidth: 240,
+                        height: "auto",
+                        borderRadius: 1,
+                        border: "1px solid rgba(0, 191, 255, 0.3)",
+                        boxShadow: "0 0 18px rgba(0, 191, 255, 0.15)",
+                        transition: "transform 0.3s ease, box-shadow 0.3s ease",
+                        "&:hover": {
+                          transform: "translateY(-3px)",
+                          boxShadow: "0 0 28px rgba(0, 191, 255, 0.35)",
+                        },
+                      }}
+                    />
+                  </Box>
+                )}
+
                 <Box>
                   {/* Category Badge */}
                   <Chip 
@@ -134,6 +162,7 @@ const BooksPage: React.FC = () => {
                   size="small" 
                   variant="outlined" 
                   startIcon={<BookIcon />}
+                  onClick={() => setSelectedBook(book)}
                   sx={{
                     color: cyberBlue,
                     borderColor: "rgba(0, 191, 255, 0.3)",
@@ -153,6 +182,9 @@ const BooksPage: React.FC = () => {
       </Grid>
 
     </Container>
+
+      <BookMetadataModal book={selectedBook} onClose={() => setSelectedBook(null)} />
+    </>
   );
 };
 

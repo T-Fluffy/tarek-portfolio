@@ -1,14 +1,32 @@
 import type { BookData } from "../types/BookData";
+import cleanCodeCover from "../assets/images/clean-code.jpg";
+import pragmaticProgrammerCover from "../assets/images/pragmatic-programmer.jpg";
+import fundamentalsSoftwareArchitectureCover from "../assets/images/fundamentals-software-architecture.jpg";
+import unityShadersBibleCover from "../assets/images/unity-shaders-bible.jpg";
+import gameDevelopmentProductionCover from "../assets/images/game-development-production.jpg";
+import learningDesignPatternsUnityCover from "../assets/images/learning-design-patterns-unity.jpg";
+import gameProgrammingPatternsCover from "../assets/images/game-programming-patterns.jpg";
+import learningGdscriptGodot4Cover from "../assets/images/learning-gdscript-godot4.jpg";
+import effectiveTypescriptCover from "../assets/images/effective-typescript.jpg";
+import pixelLogicCover from "../assets/images/pixel-logic.png";
 
 export const booksData: BookData[] = [
   {
     id: "1",
-    title: "Clean Code",
-    author: "Robert C. Martin",
-    category: "Software Engineering",
-    status: "Read",
-    rating: 5,
-    description: "A handbook of agile software engineering practices that will help you write code that is readable and maintainable."
+    title: "Fundamentals of Software Architecture: An Engineering Approach (2nd ed)",
+    author: "Mark Richards & Neal Ford",
+    category: "Architecture",
+    status: "Reading",
+    rating: 4,
+    description: "A comprehensive overview of architectural characteristics, patterns, component determination, governance and more, applicable across all technology stacks.",
+    image: fundamentalsSoftwareArchitectureCover,
+    highlights: [
+      "Bridges the gap from developer to architect with practical, stack-agnostic principles",
+      "Covers architectural styles and patterns: microservices, modular monoliths, microkernels, layered",
+      "Explains architectural characteristics, component determination and diagramming",
+      "Five new chapters in this edition: data, governance, generative AI and team topologies",
+      "Real-world examples drawn from the authors' professional architecture training",
+    ],
   },
   {
     id: "2",
@@ -17,24 +35,144 @@ export const booksData: BookData[] = [
     category: "Career",
     status: "Reading",
     rating: 5,
-    description: "Your one-stop manual for the modern software developer. It helps you master techniques to improve your programming skills."
+    description: "A timeless manual for the modern developer covering habits, tools and techniques for master craftsmanship.",
+    image: pragmaticProgrammerCover,
+    highlights: [
+      "The classic mindset: take responsibility for your work ('the cat ate my source code')",
+      "Pragmatic principles: DRY, orthogonality, reversibility and tracer bullets",
+      "Tools and habits: deliberate practice and investing in your knowledge portfolio",
+      "Updated for modern languages and toolchains in the 20th Anniversary Edition",
+      "Anecdotal, witty style that makes the lessons stick",
+    ],
   },
   {
     id: "3",
-    title: "Zero to One",
-    author: "Peter Thiel",
-    category: "Startup",
-    status: "To Read",
-    rating: 0,
-    description: "Notes on startups, or how to build the future. A guide on building monopolies and creating value."
+    title: "Clean Code",
+    author: "Robert C. Martin",
+    category: "Software Engineering",
+    status: "Read",
+    rating: 5,
+    description: "A handbook of agile software craftsmanship that will help you write code that is readable, testable and maintainable.",
+    image: cleanCodeCover,
+    highlights: [
+      "A handbook for writing readable, testable, maintainable code",
+      "Meaningful names, small functions and the Single Responsibility Principle",
+      "Case studies showing bad code refactored into clean code",
+      "Code smells, heuristics and practical tips for the working developer",
+    ],
   },
   {
     id: "4",
-    title: "Design Patterns",
-    author: "Erich Gamma et al.",
-    category: "Architecture",
+    title: "The Unity Shaders Bible",
+    author: "Jettelly (Fabrizio Espíndola)",
+    category: "Graphics",
+    status: "Reading",
+    rating: 4,
+    description: "A linear explanation of shaders from beginner to advanced, covering ShaderLab, HLSL and Shader Graph with practical examples.",
+    image: unityShadersBibleCover,
+    highlights: [
+      "Linear, beginner-to-advanced explanation of shaders",
+      "Covers ShaderLab, HLSL and Shader Graph step by step",
+      "Practical examples: blending, stencils, URP, lighting and matrices",
+      "Hundreds of illustrations and code samples",
+      "Future updates included while the 2nd edition ships chapter by chapter",
+    ],
+  },
+  {
+    id: "5",
+    title: "Pixel Logic - A Guide to Pixel Art",
+    author: "Michael Azzi",
+    category: "Pixel Art",
+    status: "Read",
+    rating: 5,
+    description: "A visual-first, 242-page tutorial covering line art, anti-aliasing, colour, readability, dithering and animation.",
+    image: pixelLogicCover,
+    highlights: [
+      "Visual-first teaching: images over text",
+      "242 pages covering line art, anti-aliasing, colour, readability and dithering",
+      "Dedicated chapters on perspectives, clean-up, subpixeling and animation",
+      "Draws from 30 years of video-game graphics history",
+      "Contributions from guest artists like unseven, jinndevil and pixosprout",
+    ],
+  },
+  {
+    id: "6",
+    title: "Game Development and Production",
+    author: "Erik Bethke",
+    category: "Game Development",
     status: "Read",
     rating: 4,
-    description: "The classic collection of solutions to common design problems in software development."
+    description: "A handbook for game development covering team management, task tracking, technical design docs and outsourcing strategies.",
+    image: gameDevelopmentProductionCover,
+    highlights: [
+      "The first handbook dedicated to game development",
+      "Team management: task tracking and technical design documents",
+      "Outsourcing strategies for motion capture and voice-over talent",
+      "Covers the full production pipeline from concept to ship",
+    ],
+  },
+  {
+    id: "7",
+    title: "Learning Design Patterns with Unity",
+    author: "Harrison Ferrone",
+    category: "Design Patterns",
+    status: "Read",
+    rating: 4,
+    description: "Master creational, behavioural and structural design patterns while building games in Unity 2023 and C#.",
+    image: learningDesignPatternsUnityCover,
+    highlights: [
+      "Master design patterns while building actual Unity 2023 games in C#",
+      "Creational, behavioural and structural patterns: Singleton, Object Pool, Factory, Command, State, Decorator",
+      "Write clean, reusable and maintainable game code",
+      "Hands-on examples you can run directly in the Unity editor",
+    ],
+  },
+  {
+    id: "8",
+    title: "Game Programming Patterns",
+    author: "Robert Nystrom",
+    category: "Design Patterns",
+    status: "Read",
+    rating: 5,
+    description: "Proven patterns to untangle and optimize game code: game loop, components, scripting and spatial partitioning.",
+    image: gameProgrammingPatternsCover,
+    highlights: [
+      "Proven patterns from shipped AAA titles (Electronic Arts)",
+      "The game loop, component-based design and spatial partitioning",
+      "Scripting engines, quadtrees and the command pattern for undo/redo",
+      "Free to read online at gameprogrammingpatterns.com",
+    ],
+  },
+  {
+    id: "9",
+    title: "Learning GDScript by Developing a Game with Godot 4",
+    author: "Sander Vanhove",
+    category: "Game Development",
+    status: "Reading",
+    rating: 4,
+    description: "A fun, illustrated introduction to GDScript 2.0 and Godot 4, building a complete game from scratch.",
+    image: learningGdscriptGodot4Cover,
+    highlights: [
+      "Learn GDScript 2.0 from the absolute basics",
+      "Build a complete Vampire-Survivors-style game step by step",
+      "Covers Godot 4 physics, cameras, menus, autoloads and multiplayer",
+      "Illustrated, friendly approach for newcomers to programming",
+    ],
+  },
+  {
+    id: "10",
+    title: "Effective TypeScript: 83 Specific Ways to Improve Your TypeScript (2nd ed)",
+    author: "Dan Vanderkam",
+    category: "TypeScript",
+    status: "Reading",
+    rating: 5,
+    description: "83 concrete, tested items on using TypeScript well, thoroughly revised and updated for TypeScript 5.",
+    image: effectiveTypescriptCover,
+    highlights: [
+      "83 specific, actionable items in the Effective-style format",
+      "Updated for TypeScript 5 with 50% more content than the first edition",
+      "Two new chapters: type-level programming and TypeScript recipes",
+      "Concrete examples drawn from real production codebases",
+    ],
   },
 ];

@@ -7,4 +7,6 @@ export interface BookData {
   status: "Read" | "Reading" | "To Read";
   rating: number;
   description: string;
+  image?: string;
+  highlights: string[];
 }
