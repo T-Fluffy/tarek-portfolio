@@ -1,0 +1,30 @@
+# Tarek Halloull
+
+> Junior Software Engineer and Game Developer specializing in Unity and Godot game development and full-stack web applications.
+
+## About
+
+- [About Tarek](https://T-Fluffy.github.io/tarek-portfolio/#/about): Background, mission statement, and downloadable CVs (Web and GameDev variants, English and French).
+- [Projects](https://T-Fluffy.github.io/tarek-portfolio/#/projects): Full catalogue of game-development and web projects.
+- [Reading list](https://T-Fluffy.github.io/tarek-portfolio/#/BooksPage): Professional books read or currently reading, with ratings.
+- [Contact](https://T-Fluffy.github.io/tarek-portfolio/#/contact): Contact form for professional inquiries.
+
+## Selected Projects
+
+- [Duel-Masters](https://T-Fluffy.github.io/tarek-portfolio/#/project/1354115610): Modern digital recreation of the Duel Masters trading card game: Godot 4 C# client with pure-C# data-driven architecture.
+- [tarek-portfolio-backend](https://T-Fluffy.github.io/tarek-portfolio/#/project/1135234827): ASP.NET Core backend for this portfolio: contact API with validation, rate limiting and email delivery.
+- [ThreeDMarket](https://T-Fluffy.github.io/tarek-portfolio/#/project/508857959): Full-stack 3D asset marketplace: Angular + three.js frontend with a Spring Boot backend.
+- [DungeonWorldApp](https://T-Fluffy.github.io/tarek-portfolio/#/project/1325975559): Full-stack web app that turns Fighting Fantasy-style gamebook PDFs into playable adventures.
+- [chkoba](https://T-Fluffy.github.io/tarek-portfolio/#/project/1106587367): 2D card game built with the Godot engine.
+- [Project-Structure](https://T-Fluffy.github.io/tarek-portfolio/#/project/1351002529): Starter Godot project-structure template for C# users with a clean architecture.
+- [StockManagementApp](https://T-Fluffy.github.io/tarek-portfolio/#/project/1149019373): Full-stack stock management application.
+- [duel_master](https://T-Fluffy.github.io/tarek-portfolio/#/project/1020425980): Backend service for the Duel Masters card game.
+- [My3DChess](https://T-Fluffy.github.io/tarek-portfolio/#/project/739760490): 3D chess built with the Unity engine.
+- [editor](https://T-Fluffy.github.io/tarek-portfolio/#/project/999870584): Online document editor platform web app.
+
+## Contact
+
+- [Contact form](https://T-Fluffy.github.io/tarek-portfolio/#/contact)
+- GitHub: https://github.com/T-Fluffy
+- LinkedIn: https://www.linkedin.com/in/tarekhalloul/
+- Email: halloultarek1@gmail.com
