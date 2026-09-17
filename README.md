@@ -83,6 +83,9 @@ To move to a custom domain later, build with `VITE_SITE_URL=https://example.com`
   HSTS/clickjacking/sniffing headers, non-root user.
 - **Backend** (in `tarek-portfolio-backend`): input validation, honeypot anti-spam,
   email subject/body sanitization, IP-aware rate limiting, non-root container.
+- **AI crawlers**: `robots.txt` refuses AI training/data-collection bots (`GPTBot`,
+  `ClaudeBot`, `CCBot`, `Google-Extended`, …) while keeping search indexing;
+  `llms.txt` exposes only a curated public summary.
 
 ## 🧪 Testing
 
