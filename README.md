@@ -78,9 +78,17 @@ To move to a custom domain later, build with `VITE_SITE_URL=https://example.com`
 - **CI scanning**: `osv-scanner` on the lockfile and **Trivy** CVE scan on the Docker image.
 - **Dependabot**: automated security-update PRs for npm + GitHub Actions.
 - **CSP**: a Content-Security-Policy (meta tag + nginx header) allows only the required
-  GitHub / LFS media / socialify image hosts and blocks inline scripts.
+  GitHub / LFS media / socialify image hosts and the Cloudflare Turnstile
+  endpoints, blocks inline scripts and plugins (`object-src 'none'`), and upgrades
+  insecure requests. Limitation: GitHub Pages cannot send custom headers, and
+  `frame-ancestors` inside a `<meta>` tag is ignored by browsers — so clickjacking
+  protection is only real on the Docker variant (nginx header). Fixing that for Pages
+  needs a custom domain fronted by Cloudflare (or similar).
 - **nginx**: `server_tokens off`, dotfile access denied, immutable hashing for assets,
-  HSTS/clickjacking/sniffing headers, non-root user.
+  clickjacking/sniffing headers, non-root user. (No HSTS: nginx serves plain HTTP on
+  `:8080`; HSTS is meaningless without TLS. The `add_header` include is repeated at
+  every level on purpose — nginx drops inherited headers when a child block defines
+  its own, and duplicate CSPs fail closed.)
 - **Backend** (in `tarek-portfolio-backend`): input validation, honeypot anti-spam,
   email subject/body sanitization, IP-aware rate limiting, non-root container.
 - **AI crawlers**: `robots.txt` refuses AI training/data-collection bots (`GPTBot`,
