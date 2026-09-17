@@ -18,14 +18,14 @@ const cyberBlue = "#00BFFF";
 const ReadmeSection: React.FC<ReadmeSectionProps> = ({ owner, repo, branch }) => {
   const [readme, setReadme] = useState<string | null>(null);
   const [status, setStatus] = useState<"loading" | "ready" | "error">("loading");
-  const rawBase = `https://github.com/${owner}/${repo}/blob/${branch}`;
+  const rawBase = `https://github.com/${encodeURIComponent(owner)}/${encodeURIComponent(repo)}/blob/${encodeURIComponent(branch)}`;
 
   useEffect(() => {
     let cancelled = false;
     const load = async () => {
       setStatus("loading");
       try {
-        const res = await fetch(`https://api.github.com/repos/${owner}/${repo}/readme`, {
+        const res = await fetch(`https://api.github.com/repos/${encodeURIComponent(owner)}/${encodeURIComponent(repo)}/readme`, {
           headers: { Accept: "application/vnd.github.raw" },
         });
         if (res.status === 404) {
@@ -49,7 +49,11 @@ const ReadmeSection: React.FC<ReadmeSectionProps> = ({ owner, repo, branch }) =>
   }, [owner, repo]);
 
   const resolveSrc = (src?: string): string => {
-    if (!src || /^(https?:|data:)/i.test(src)) return src ?? "";
+    if (!src) return "";
+    if (/^https?:/i.test(src)) return src;
+    // Raster data-URLs only: SVG (script-capable) and other schemes fail closed.
+    if (/^data:image\/(png|jpeg|gif|webp);/i.test(src)) return src;
+    if (/^[a-z][a-z0-9+.-]*:/i.test(src)) return "";
     const path = src.replace(/^\.?\//, "").split("/").map(encodeURIComponent).join("/");
     return `${rawBase}/${path}?raw=true`;
   };
@@ -59,7 +63,12 @@ const ReadmeSection: React.FC<ReadmeSectionProps> = ({ owner, repo, branch }) =>
       <img src={resolveSrc(src)} alt={alt ?? ""} loading="lazy" {...props} />
     ),
     a: ({ node, href, children, ...props }) => {
-      const external = href?.startsWith("http");
+      // Defense in depth: never render an executable scheme, even if the
+      // sanitizer configuration ever changes. Blocked links keep their text.
+      if (!href || /^(javascript|data|vbscript):/i.test(href.trim())) {
+        return <>{children}</>;
+      }
+      const external = href.startsWith("http");
       return (
         <a
           href={href}
