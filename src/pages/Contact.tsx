@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
+import Turnstile from "../components/Turnstile";
 
 import { 
   Container, Typography, Box, TextField, Button, 
@@ -24,6 +25,15 @@ const Typewriter = ({ text, speed = 30 }: { text: string; speed?: number }) => {
 const Contact: React.FC = () => {
   const cyberBlue = "#00BFFF";
   const [status, setStatus] = useState<"IDLE" | "SENDING" | "SUCCESS" | "ERROR">("IDLE");
+  // Cloudflare Turnstile: configured via VITE_TURNSTILE_SITE_KEY. Tokens are
+  // single-use, so the widget is reset after every submit attempt.
+  const turnstileSiteKey = (import.meta.env.VITE_TURNSTILE_SITE_KEY as string | undefined) ?? "";
+  const [turnstileToken, setTurnstileToken] = useState<string | null>(null);
+  const [turnstileResetKey, setTurnstileResetKey] = useState(0);
+  const resetTurnstile = () => {
+    setTurnstileToken(null);
+    setTurnstileResetKey((k) => k + 1);
+  };
 
   const fieldStyles = {
     mb: 2,
@@ -50,6 +60,10 @@ const Contact: React.FC = () => {
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
+    if (turnstileSiteKey && !turnstileToken) {
+      toast.error("> ABORT: Complete the captcha first");
+      return;
+    }
     setStatus("SENDING");
     const formData = new FormData(e.currentTarget);
 
@@ -57,18 +71,20 @@ const Contact: React.FC = () => {
       const response = await fetch(`${import.meta.env.VITE_API_URL}/api/contact/send`, { 
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(Object.fromEntries(formData)),
+        body: JSON.stringify({ ...Object.fromEntries(formData), turnstileToken }),
       });
 
       if (response.ok) {
         setStatus("SUCCESS");
         (e.target as HTMLFormElement).reset();
+        resetTurnstile();
         // Return to IDLE after 6 seconds
         setTimeout(() => setStatus("IDLE"), 6000); 
       } else { throw new Error(); }
     } catch {
       setStatus("ERROR");
       toast.error("> ERROR: Signal Lost");
+      resetTurnstile();
       setTimeout(() => setStatus("IDLE"), 4000);
     }
   };
@@ -158,6 +174,14 @@ const Contact: React.FC = () => {
               <TextField fullWidth name="subject" label="// SUBJECT" variant="outlined" sx={fieldStyles} required />
               <TextField fullWidth name="message" label="// MESSAGE" multiline rows={4} variant="outlined" sx={fieldStyles} required />
               
+              {turnstileSiteKey && (
+                <Turnstile
+                  siteKey={turnstileSiteKey}
+                  onTokenChange={setTurnstileToken}
+                  resetKey={turnstileResetKey}
+                />
+              )}
+
               <Button 
                 type="submit"
                 fullWidth 

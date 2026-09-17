@@ -37,6 +37,8 @@ jobs:
           # Render backend URL - configure as a repository secret named VITE_API_URL.
           VITE_API_URL: ${{ secrets.VITE_API_URL }}
           VITE_BASE_PATH: /tarek-portfolio/
+          # Cloudflare Turnstile site key (public) - repository secret named VITE_TURNSTILE_SITE_KEY.
+          VITE_TURNSTILE_SITE_KEY: ${{ secrets.VITE_TURNSTILE_SITE_KEY }}
 
       - name: Publish to gh-pages branch
         run: |
