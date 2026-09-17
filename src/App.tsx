@@ -13,6 +13,8 @@ import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 import ProjectDetails from "./pages/ProjectDetails";
 import BooksPage from "./pages/BooksPage";
+import { ToastContainer } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 const ScrollToTop = () => {
   const { pathname } = useLocation();
@@ -59,6 +61,9 @@ const App: React.FC = () => {
       </main>
 
       <Footer />
+
+      {/* Required for toast.error() calls (e.g. the contact form) to display. */}
+      <ToastContainer position="top-right" theme="dark" autoClose={5000} />
 
       <style>
         {`

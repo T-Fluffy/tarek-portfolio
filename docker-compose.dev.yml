@@ -7,6 +7,7 @@ services:
       VITE_API_URL: ""
       VITE_BASE_PATH: /
       VITE_POLLING: "true"
+      VITE_TURNSTILE_SITE_KEY: ${VITE_TURNSTILE_SITE_KEY:-}
       # URL of the hosted backend (Render). Set in your .env file.
       BACKEND_URL: ${BACKEND_URL:?Set BACKEND_URL in .env}
     ports:
