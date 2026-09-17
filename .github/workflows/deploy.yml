@@ -43,6 +43,8 @@ jobs:
           VITE_BASE_PATH: /tarek-portfolio/
           # Cloudflare Turnstile site key (public) - repository secret named VITE_TURNSTILE_SITE_KEY.
           VITE_TURNSTILE_SITE_KEY: ${{ secrets.VITE_TURNSTILE_SITE_KEY }}
+          # Page title baked into index.html (%VITE_APP_TITLE%); public text, no secret needed.
+          VITE_APP_TITLE: "TFluffy's Portfolio"
 
       - name: Publish to gh-pages branch
         # gh-pages clones into a temp dir, so it cannot reuse checkout's
