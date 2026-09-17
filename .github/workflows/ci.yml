@@ -39,7 +39,7 @@ jobs:
           VITE_TURNSTILE_SITE_KEY: 1x00000000000000000000AA
 
       - name: Scan lockfile for known vulnerabilities
-        uses: google/osv-scanner-action/osv-scanner-action@v2.5.0
+        uses: google/osv-scanner-action/osv-scanner-action@v2.6.0
         with:
           scan-args: |-
             --format=sarif
