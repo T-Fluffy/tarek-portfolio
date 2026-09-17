@@ -52,6 +52,8 @@ function loadTurnstileScript(): Promise<void> {
 interface TurnstileProps {
   siteKey: string;
   onTokenChange: (token: string | null) => void;
+  /** Called when the widget itself fails (script blocked, Cloudflare error). */
+  onError?: () => void;
   /** Bump to force the widget back to its initial state (tokens are single-use). */
   resetKey?: number;
 }
@@ -60,15 +62,22 @@ interface TurnstileProps {
  * Cloudflare Turnstile widget (explicit render, dark theme to match the site).
  * Renders nothing when no site key is configured.
  */
-export default function Turnstile({ siteKey, onTokenChange, resetKey = 0 }: TurnstileProps) {
+export default function Turnstile({ siteKey, onTokenChange, onError, resetKey = 0 }: TurnstileProps) {
   const containerRef = useRef<HTMLDivElement>(null);
   const widgetIdRef = useRef<string | null>(null);
   const callbackRef = useRef(onTokenChange);
   callbackRef.current = onTokenChange;
+  const errorRef = useRef(onError);
+  errorRef.current = onError;
 
   useEffect(() => {
     if (!siteKey) return;
     let cancelled = false;
+
+    const reportError = () => {
+      callbackRef.current(null);
+      errorRef.current?.();
+    };
 
     loadTurnstileScript()
       .then(() => {
@@ -80,10 +89,12 @@ export default function Turnstile({ siteKey, onTokenChange, resetKey = 0 }: Turn
           theme: "dark",
           callback: (token: string) => callbackRef.current(token),
           "expired-callback": () => callbackRef.current(null),
-          "error-callback": () => callbackRef.current(null),
+          "error-callback": () => reportError(),
         });
       })
-      .catch(() => callbackRef.current(null));
+      .catch(() => {
+        if (!cancelled) reportError();
+      });
 
     return () => {
       cancelled = true;

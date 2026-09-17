@@ -30,8 +30,12 @@ const Contact: React.FC = () => {
   const turnstileSiteKey = (import.meta.env.VITE_TURNSTILE_SITE_KEY as string | undefined) ?? "";
   const [turnstileToken, setTurnstileToken] = useState<string | null>(null);
   const [turnstileResetKey, setTurnstileResetKey] = useState(0);
+  // True when the widget itself failed (blocked script, Cloudflare error):
+  // submitting is pointless, so tell the user why instead of failing silently.
+  const [turnstileFailed, setTurnstileFailed] = useState(false);
   const resetTurnstile = () => {
     setTurnstileToken(null);
+    setTurnstileFailed(false);
     setTurnstileResetKey((k) => k + 1);
   };
 
@@ -60,6 +64,10 @@ const Contact: React.FC = () => {
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
+    if (turnstileFailed) {
+      toast.error("> ABORT: Security check unavailable — refresh and try again");
+      return;
+    }
     if (turnstileSiteKey && !turnstileToken) {
       toast.error("> ABORT: Complete the captcha first");
       return;
@@ -175,11 +183,30 @@ const Contact: React.FC = () => {
               <TextField fullWidth name="message" label="// MESSAGE" multiline rows={4} variant="outlined" sx={fieldStyles} required />
               
               {turnstileSiteKey && (
-                <Turnstile
-                  siteKey={turnstileSiteKey}
-                  onTokenChange={setTurnstileToken}
-                  resetKey={turnstileResetKey}
-                />
+                <>
+                  <Turnstile
+                    siteKey={turnstileSiteKey}
+                    onTokenChange={(token) => {
+                      setTurnstileToken(token);
+                      if (token) setTurnstileFailed(false);
+                    }}
+                    onError={() => setTurnstileFailed(true)}
+                    resetKey={turnstileResetKey}
+                  />
+                  {turnstileFailed && (
+                    <Typography
+                      sx={{
+                        color: "#ff5252",
+                        fontFamily: "monospace",
+                        fontSize: "0.85rem",
+                        mb: 2,
+                      }}
+                    >
+                      &gt; STAT: security check failed to load. Disable any ad-blocker for this
+                      site and refresh — or try again later.
+                    </Typography>
+                  )}
+                </>
               )}
 
               <Button 

@@ -54,4 +54,28 @@ describe('Turnstile Component', () => {
       delete window.turnstile;
     }
   });
+
+  it('reports widget errors to the parent', async () => {
+    const onTokenChange = vi.fn();
+    const onError = vi.fn();
+    let capturedErrorCallback: (() => void) | undefined;
+    window.turnstile = {
+      render: (_el, options) => {
+        capturedErrorCallback = options['error-callback'];
+        return 'widget-1';
+      },
+      reset: () => {},
+      remove: () => {},
+    };
+    try {
+      render(<Turnstile siteKey="test-site-key" onTokenChange={onTokenChange} onError={onError} />);
+      await Promise.resolve();
+      await new Promise((r) => setTimeout(r, 0));
+      capturedErrorCallback?.();
+      expect(onError).toHaveBeenCalled();
+      expect(onTokenChange).toHaveBeenCalledWith(null);
+    } finally {
+      delete window.turnstile;
+    }
+  });
 });
