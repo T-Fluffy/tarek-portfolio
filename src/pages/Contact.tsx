@@ -24,7 +24,7 @@ const Typewriter = ({ text, speed = 30 }: { text: string; speed?: number }) => {
 
 const Contact: React.FC = () => {
   const cyberBlue = "#00BFFF";
-  const [status, setStatus] = useState<"IDLE" | "SENDING" | "SUCCESS" | "ERROR">("IDLE");
+  const [status, setStatus] = useState<"IDLE" | "SENDING" | "SUCCESS" | "ERROR" | "UNAVAILABLE">("IDLE");
   // Cloudflare Turnstile: configured via VITE_TURNSTILE_SITE_KEY. Tokens are
   // single-use, so the widget is reset after every submit attempt.
   const turnstileSiteKey = (import.meta.env.VITE_TURNSTILE_SITE_KEY as string | undefined) ?? "";
@@ -88,7 +88,24 @@ const Contact: React.FC = () => {
         resetTurnstile();
         // Return to IDLE after 6 seconds
         setTimeout(() => setStatus("IDLE"), 6000); 
-      } else { throw new Error(); }
+      } else {
+        // The backend fails closed with 503 captcha-unavailable when its
+        // Turnstile secret is missing: dedicated panel, not a generic error.
+        let unavailable = false;
+        try {
+          const body = (await response.json()) as { reason?: string };
+          unavailable = response.status === 503 && body.reason === "captcha-unavailable";
+        } catch {
+          unavailable = false;
+        }
+        if (unavailable) {
+          setStatus("UNAVAILABLE");
+          resetTurnstile();
+          setTimeout(() => setStatus("IDLE"), 8000);
+        } else {
+          throw new Error();
+        }
+      }
     } catch {
       setStatus("ERROR");
       toast.error("> ERROR: Signal Lost");
@@ -160,7 +177,45 @@ const Contact: React.FC = () => {
               </Box>
             </Fade>
 
-            <form onSubmit={handleSubmit} style={{ visibility: status === "SUCCESS" ? "hidden" : "visible" }}>
+            {/* Dedicated panel: backend captcha gate is down (503 captcha-unavailable) */}
+            <Fade in={status === "UNAVAILABLE"}>
+              <Box sx={{
+                position: "absolute",
+                top: 0, left: 0, right: 0, bottom: 0,
+                bgcolor: "rgba(5, 5, 5, 0.9)",
+                backdropFilter: "blur(10px)",
+                display: "flex",
+                flexDirection: "column",
+                alignItems: "center",
+                justifyContent: "center",
+                zIndex: 20,
+                textAlign: "center",
+                p: 3
+              }}>
+                <Box sx={{
+                  mb: 2, p: 2,
+                  border: `1px solid #ffb300`,
+                  borderRadius: "50%",
+                  display: "flex"
+                }}>
+                  <CircularProgress variant="determinate" value={100} sx={{ color: "#ffb300" }} />
+                </Box>
+                <Typography variant="h5" sx={{ color: "#ffb300", fontFamily: "monospace", fontWeight: "bold", mb: 1 }}>
+                  VERIFICATION_OFFLINE
+                </Typography>
+                <Typography sx={{ color: "white", fontFamily: "monospace", opacity: 0.8 }}>
+                  {status === "UNAVAILABLE" && <Typewriter text="> The security verification service is temporarily down. Your message was NOT sent — please try again later." />}
+                </Typography>
+                <Button
+                  onClick={() => setStatus("IDLE")}
+                  sx={{ mt: 4, color: cyberBlue, fontFamily: "monospace" }}
+                >
+                  &gt; RETRY_UPLINK
+                </Button>
+              </Box>
+            </Fade>
+
+            <form onSubmit={handleSubmit} style={{ visibility: status === "IDLE" || status === "SENDING" || status === "ERROR" ? "visible" : "hidden" }}>
               {/* Honeypot anti-spam: hidden from humans, bots often fill it */}
               <input
                 type="text"
