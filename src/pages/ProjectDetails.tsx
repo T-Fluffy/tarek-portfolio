@@ -30,10 +30,26 @@ const ProjectDetails: React.FC = () => {
     const fetchFullDetails = async () => {
       try {
         setLoading(true);
+        // projectId comes straight from the URL: accept numeric GitHub
+        // repository IDs only, so crafted paths can't reach the API.
+        if (!projectId || !/^\d+$/.test(projectId)) {
+          throw new Error("Invalid project id");
+        }
         const repoRes = await fetch(`https://api.github.com/repositories/${projectId}`);
         if (!repoRes.ok) throw new Error("Repo not found");
         const repo = await repoRes.json();
 
+        // Only first-party repos are rendered; anything else gets the
+        // error UI below instead of fetching untrusted content.
+        if (repo.owner?.login !== "T-Fluffy") throw new Error("Foreign repository");
+
+        // Never follow a server-provided URL blindly.
+        if (
+          typeof repo.languages_url !== "string" ||
+          !repo.languages_url.startsWith("https://api.github.com/")
+        ) {
+          throw new Error("Unexpected API response");
+        }
         const langRes = await fetch(repo.languages_url);
         const langData = await langRes.json();
         const allLanguages = Object.keys(langData);
@@ -44,7 +60,7 @@ const ProjectDetails: React.FC = () => {
           id: repo.id.toString(),
           title: repo.name.replace(/-/g, ' ').toUpperCase(),
           description: repo.description || "No description provided in GitHub logs.",
-          imageUrl: `https://github.com/T-Fluffy/${repo.name}/blob/${branch}/social-preview.png?raw=true`,
+          imageUrl: `https://github.com/T-Fluffy/${encodeURIComponent(repo.name)}/blob/${branch}/social-preview.png?raw=true`,
           technologies: Array.from(new Set([...allLanguages, ...(repo.topics || [])])),
           githubLink: repo.html_url,
           live: repo.homepage || "",
@@ -95,7 +111,25 @@ const ProjectDetails: React.FC = () => {
     );
   }
 
-  if (!project) return null;
+  if (!project) {
+    return (
+      <Container
+        maxWidth="lg"
+        sx={{ pt: { xs: 12, md: 18 }, pb: { xs: 10, md: 15 }, textAlign: "center" }}
+      >
+        <Typography sx={{ color: cyberBlue, fontFamily: 'monospace', letterSpacing: 2 }}>
+          &gt; ERROR: PROJECT_NOT_FOUND
+        </Typography>
+        <Button
+          startIcon={<ArrowBackIcon />}
+          onClick={() => navigate('/projects')}
+          sx={{ color: "rgba(255,255,255,0.5)", mt: 2, fontFamily: 'monospace', "&:hover": { color: cyberBlue } }}
+        >
+          BACK_TO_GALLERY
+        </Button>
+      </Container>
+    );
+  }
 
   return (
     <Fade in={true} timeout={800}>
@@ -133,7 +167,7 @@ const ProjectDetails: React.FC = () => {
                 component="img" 
                 src={project.imageUrl} 
                 onError={(e: React.SyntheticEvent<HTMLImageElement>) => { 
-                  e.currentTarget.src = `https://socialify.git.ci/T-Fluffy/${project.image}/image?theme=Dark&pattern=Circuit%20Board`; 
+                  e.currentTarget.src = `https://socialify.git.ci/T-Fluffy/${encodeURIComponent(project.image)}/image?theme=Dark&pattern=Circuit%20Board`; 
                 }}
                 sx={{ width: '100%', aspectRatio: '16/9', objectFit: 'cover', display: "block" }} 
               />
@@ -190,7 +224,8 @@ const ProjectDetails: React.FC = () => {
                 variant="contained" 
                 startIcon={<GitHubIcon />} 
                 href={project.githubLink} 
-                target="_blank" 
+                target="_blank"
+                rel="noopener noreferrer" 
                 sx={{ 
                   bgcolor: cyberBlue, 
                   color: "black", 
@@ -202,11 +237,12 @@ const ProjectDetails: React.FC = () => {
                 SOURCE_CODE
               </Button>
               {project.live && (
-                <Button 
-                  variant="outlined" 
-                  startIcon={<LaunchIcon />} 
-                  href={project.live} 
-                  target="_blank" 
+<Button 
+                    variant="outlined" 
+                    startIcon={<LaunchIcon />} 
+                    href={project.live} 
+                    target="_blank"
+                    rel="noopener noreferrer"
                   sx={{ 
                     color: cyberBlue, 
                     borderColor: cyberBlue, 

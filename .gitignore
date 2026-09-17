@@ -8,7 +8,9 @@ Thumbs.db
 node_modules/
 dist/
 dist-ssr/
-.env.local
+.env
+.env.*
+!.env.example
 .eslintcache
 .vitest-root/ # Vitest cache
 

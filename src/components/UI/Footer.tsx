@@ -84,6 +84,7 @@ const Footer: React.FC = () => {
                 <IconButton
                   href={social.link}
                   target="_blank"
+                  rel="noopener noreferrer"
                   sx={{
                     color: "rgba(255,255,255,0.5)",
                     border: "1px solid rgba(255,255,255,0.05)",
