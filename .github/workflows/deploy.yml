@@ -45,10 +45,13 @@ jobs:
           VITE_TURNSTILE_SITE_KEY: ${{ secrets.VITE_TURNSTILE_SITE_KEY }}
 
       - name: Publish to gh-pages branch
-        # No -r URL and no token in the command: actions/checkout persists
-        # credentials by default, so pushing to `origin` just works and the
-        # token never appears in workflow text or logs.
+        # gh-pages clones into a temp dir, so it cannot reuse checkout's
+        # persisted credentials: the token must travel in the push URL.
+        # It stays masked (GitHub masks secrets) and now flows via env
+        # instead of an inline expression.
+        env:
+          GH_PAGES_REPO: https://x-access-token:${{ github.token }}@github.com/${{ github.repository }}.git
         run: |
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-          npx --no-install gh-pages -d dist
+          npx --no-install gh-pages -d dist -r "$GH_PAGES_REPO"
