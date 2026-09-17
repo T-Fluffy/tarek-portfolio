@@ -10,11 +10,12 @@ const backendUrl = process.env.BACKEND_URL || '';
 function cspMeta(): Plugin {
   const apiUrl = process.env.VITE_API_URL || '';
   const cspValue =
-    "default-src 'self'; script-src 'self'; style-src 'self' 'unsafe-inline'; " +
+    "default-src 'self'; script-src 'self' https://challenges.cloudflare.com; style-src 'self' 'unsafe-inline'; " +
     "img-src 'self' data: https://github.com https://raw.githubusercontent.com " +
     "https://avatars.githubusercontent.com https://media.githubusercontent.com https://socialify.git.ci; " +
     `connect-src 'self' ${apiUrl} https://api.github.com; ` +
-    "font-src 'self' data:; base-uri 'self'; form-action 'self'; frame-ancestors 'none'";
+    "font-src 'self' data:; base-uri 'self'; form-action 'self'; " +
+    "frame-src https://challenges.cloudflare.com; frame-ancestors 'none'";
 
   return {
     name: 'html-csp',
